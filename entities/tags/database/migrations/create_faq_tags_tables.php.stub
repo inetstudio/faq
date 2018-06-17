@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFAQTagsTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('faq_tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('title')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('faq_taggables', function (Blueprint $table) {
+            $table->integer('tag_model_id')->unsigned();
+            $table->integer('taggable_id')->unsigned();
+            $table->string('taggable_type');
+            $table->timestamps();
+
+            $table->unique(['tag_model_id', 'taggable_id', 'taggable_type'], 'faq_taggables_ids_type_unique');
+            $table->foreign('tag_model_id')->references('id')->on('tags')->onDelete('cascade')->onUpdate('cascade');;
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('faq_taggables');
+        Schema::dropIfExists('faq_tags');
+    }
+}

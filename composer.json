@@ -1,0 +1,35 @@
+{
+    "name": "inetstudio/faq",
+    "description": "Package for faq",
+    "homepage": "https://github.com/inetstudio/faq",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konstantin Bukin",
+            "email": "bukin@inetstudio.ru"
+        }
+    ],
+    "require": {
+        "inetstudio/admin-panel": "1.6.*",
+        "inetstudio/persons": "1.6.*"
+    },
+    "autoload": {
+      "psr-4": {
+        "InetStudio\\FAQ\\": "package/src",
+        "InetStudio\\FAQ\\Questions\\": "entities/questions/src",
+        "InetStudio\\FAQ\\Tags\\": "entities/tags/src"
+      }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "InetStudio\\FAQ\\Providers\\FAQServiceProvider",
+                "InetStudio\\FAQ\\Questions\\Providers\\QuestionsBindingsServiceProvider",
+                "InetStudio\\FAQ\\Questions\\Providers\\QuestionsServiceProvider",
+                "InetStudio\\FAQ\\Tags\\Providers\\FormBuilderServiceProvider",
+                "InetStudio\\FAQ\\Tags\\Providers\\TagsBindingsServiceProvider",
+                "InetStudio\\FAQ\\Tags\\Providers\\TagsServiceProvider"
+            ]
+        }
+    }
+}
