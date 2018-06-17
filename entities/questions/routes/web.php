@@ -11,3 +11,10 @@ Route::group([
 
     Route::resource('questions', 'QuestionsControllerContract', ['as' => 'back.faq']);
 });
+
+Route::group([
+    'namespace' => 'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Front',
+    'middleware' => ['web'],
+], function () {
+    Route::any('faq/questions/send', 'QuestionsControllerContract@save')->name('front.faq.questions.send');
+});
