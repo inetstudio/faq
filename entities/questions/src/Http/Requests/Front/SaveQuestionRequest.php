@@ -39,7 +39,7 @@ class SaveQuestionRequest extends FormRequest implements SaveQuestionRequestCont
             'email.max' => 'Поле «Email» не должно превышать 255 символов',
             'email.email' => 'Поле «Email» должно содержать значение в корректном формате',
 
-            'policy-agree.required' => 'Обязательно для заполнения',
+            'qa-policy-agree.required' => 'Обязательно для заполнения',
 
             'g-recaptcha-response.required' => 'Поле «Капча» обязательно для заполнения',
             'g-recaptcha-response.captcha'  => 'Неверный код капча',
@@ -54,8 +54,8 @@ class SaveQuestionRequest extends FormRequest implements SaveQuestionRequestCont
     public function rules()
     {
         $rules = [
-            'message' => 'required',
-            'policy-agree' => 'required',
+            'question' => 'required',
+            'qa-policy-agree' => 'required',
         ];
 
         if (! Auth::user()) {
