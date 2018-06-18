@@ -49,7 +49,7 @@ class SaveQuestionRequest extends FormRequest implements SaveQuestionRequestCont
     public function rules(Request $request)
     {
         return [
-            'name' => 'required|max:255',
+            'name' => ($request->has('name')) ? 'required|max:255' : '',
             'classifiers' => 'required',
             'persons' => 'required',
             'answer.text' => 'required_if:is_active,1',

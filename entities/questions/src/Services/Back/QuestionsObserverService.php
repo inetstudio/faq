@@ -77,7 +77,7 @@ class QuestionsObserverService implements QuestionsObserverServiceContract
      */
     public function updated(QuestionModelContract $item): void
     {
-        if ($item->is_active === 1 && $item->getOriginal('answer') !== $item->answer) {
+        if ($item->is_active == 1 && $item->getOriginal('is_active') !== $item->is_active && $item->email) {
             if (config('faq_questions.queue.enable')) {
                 $queue = config('faq_questions.queue.name') ?? 'faq_questions_notify';
 
