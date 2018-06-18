@@ -42,7 +42,7 @@ class QuestionsObserverService implements QuestionsObserverServiceContract
      */
     public function created(QuestionModelContract $item): void
     {
-        if (config('faq_questions.mails.to')) {
+        if (config('faq_questions.mails_experts.to')) {
             if (config('faq_questions.queue.enable')) {
                 $queue = config('faq_questions.queue.name') ?? 'faq_questions_notify';
 
