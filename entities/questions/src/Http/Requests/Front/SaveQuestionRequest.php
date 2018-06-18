@@ -55,13 +55,13 @@ class SaveQuestionRequest extends FormRequest implements SaveQuestionRequestCont
     {
         $rules = [
             'question' => 'required',
-            'qa-policy-agree' => 'required',
         ];
 
         if (! Auth::user()) {
             $rules = array_merge($rules, [
                 'name' => 'required|max:255',
                 'email' => 'required|max:255|email',
+                'qa-policy-agree' => 'required',
                 'g-recaptcha-response' => [
                     'required',
                     new CaptchaRule,

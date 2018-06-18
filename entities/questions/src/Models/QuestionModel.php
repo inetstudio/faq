@@ -72,7 +72,7 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
 
     public function setQuestionAttribute($value)
     {
-        $this->attributes['question'] = trim(str_replace("&nbsp;", '', strip_tags($value['text'])));
+        $this->attributes['question'] = trim(str_replace("&nbsp;", '', strip_tags((isset($value['text'])) ? $value['text'] : $value)));
     }
 
     public function setAnswerAttribute($value)

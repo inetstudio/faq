@@ -28,6 +28,7 @@ class QuestionsService implements QuestionsServiceContract
     public function __construct(QuestionsRepositoryContract $repository)
     {
         $this->repository = $repository;
+        $this->services['classifiers'] = app()->make('InetStudio\Classifiers\Contracts\Services\Back\ClassifiersServiceContract');
         $this->services['users'] = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
     }
 
@@ -54,6 +55,8 @@ class QuestionsService implements QuestionsServiceContract
         $result = ($question && isset($question->id));
 
         if ($result) {
+            $this->services['classifiers']->attachToObject(request(), $question);
+
             event(app()->makeWith('InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract', [
                 'question' => $question,
             ]));
