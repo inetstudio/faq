@@ -46,6 +46,6 @@ class NewQuestionMail extends Mailable implements NewQuestionMailContract
                     $messageHeaders->addTextHeader($header, $value);
                 }
             })
-            ->view('admin.module.faq.questions::mails.question', ['question' => $this->question]);
+            ->view('admin.module.faq.questions::mails.question_expert', ['question' => $this->question]);
     }
 }

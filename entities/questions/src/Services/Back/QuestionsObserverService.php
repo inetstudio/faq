@@ -42,6 +42,23 @@ class QuestionsObserverService implements QuestionsObserverServiceContract
      */
     public function created(QuestionModelContract $item): void
     {
+        if (config('faq_questions.mails.to')) {
+            if (config('faq_questions.queue.enable')) {
+                $queue = config('faq_questions.queue.name') ?? 'faq_questions_notify';
+
+                $item->notify(
+                    app()->makeWith('InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionQueueableNotificationContract', [
+                        'question' => $item,
+                    ])->onQueue($queue)
+                );
+            } else {
+                $item->notify(
+                    app()->makeWith('InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionNotificationContract', [
+                        'question' => $item,
+                    ])
+                );
+            }
+        }
     }
 
     /**

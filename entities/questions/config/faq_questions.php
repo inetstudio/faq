@@ -31,4 +31,17 @@ return [
             ],
         ],
     ],
+
+    'mails' => [
+        'to' => [
+            'bukin@inetstudio.ru',
+        ],
+        'subject' => 'Новый вопрос',
+        'headers' => [],
+    ],
+
+    'queue' => [
+        'enable' => false,
+        'name' => 'faq_questions_notify'
+    ],
 ];
