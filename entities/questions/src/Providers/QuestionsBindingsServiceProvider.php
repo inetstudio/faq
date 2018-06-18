@@ -20,7 +20,8 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
         
         // Events
         'InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyQuestionEventContract' => 'InetStudio\FAQ\Questions\Events\Back\ModifyQuestionEvent',
-        
+        'InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract' => 'InetStudio\FAQ\Questions\Events\Front\SendQuestionEvent',
+
         // Mails
         'InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract' => 'InetStudio\FAQ\Questions\Mail\NewQuestionMail',
         
@@ -75,6 +76,7 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
             'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsUtilityControllerContract',
             'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Front\QuestionsControllerContract',
             'InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyQuestionEventContract',
+            'InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract',
             'InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract',
             'InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract',
             'InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionNotificationContract',

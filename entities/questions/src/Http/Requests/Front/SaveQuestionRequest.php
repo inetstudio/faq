@@ -30,7 +30,7 @@ class SaveQuestionRequest extends FormRequest implements SaveQuestionRequestCont
     public function messages()
     {
         return [
-            'question.required' => 'Поле «Сообщение» обязательно для заполнения',
+            'question.required' => 'Поле «Вопрос» обязательно для заполнения',
 
             'name.required' => 'Поле «Имя» обязательно для заполнения',
             'name.max' => 'Поле «Имя» не должно превышать 255 символов',

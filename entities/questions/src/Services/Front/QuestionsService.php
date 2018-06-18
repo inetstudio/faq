@@ -53,6 +53,12 @@ class QuestionsService implements QuestionsServiceContract
 
         $result = ($question && isset($question->id));
 
+        if ($result) {
+            event(app()->makeWith('InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract', [
+                'question' => $question,
+            ]));
+        }
+
         return [
             'success' => $result,
             'message' => ($result) ? trans('admin.module.faq.questions::questions.send_success') : trans('admin.module.faq.questions::questions.send_fail'),
