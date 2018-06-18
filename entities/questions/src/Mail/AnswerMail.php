@@ -4,13 +4,13 @@ namespace InetStudio\FAQ\Questions\Mail;
 
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract;
+use InetStudio\FAQ\Questions\Contracts\Mail\AnswerMailContract;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 
 /**
- * Class NewQuestionMail.
+ * Class AnswerMail.
  */
-class NewQuestionMail extends Mailable implements NewQuestionMailContract
+class AnswerMail extends Mailable implements AnswerMailContract
 {
     use SerializesModels;
 
@@ -20,7 +20,7 @@ class NewQuestionMail extends Mailable implements NewQuestionMailContract
     protected $question;
 
     /**
-     * NewQuestionMail constructor.
+     * AnswerMail constructor.
      *
      * @param QuestionModelContract $question
      */
@@ -36,11 +36,11 @@ class NewQuestionMail extends Mailable implements NewQuestionMailContract
      */
     public function build(): self
     {
-        $subject = config('app.name').' | '.((config('faq_questions.mails_experts.subject')) ? config('faq_questions.mails_experts.subject') : 'Новый вопрос');
-        $headers = (config('faq_questions.mails_experts.headers')) ? config('faq_questions.mails_experts.headers') : [];
+        $subject = config('app.name').' | '.((config('faq_questions.mails_users.subject')) ? config('faq_questions.mails_users.subject') : 'Ответ на вопрос');
+        $headers = (config('faq_questions.mails_users.headers')) ? config('faq_questions.mails_users.headers') : [];
 
         return $this->from(config('mail.from.address'), config('mail.from.name'))
-            ->to(config('faq_questions.mails_experts.to'), '')
+            ->to($this->question->email, $this->question->name)
             ->subject($subject)
             ->withSwiftMessage(function ($message) use ($headers) {
                 $messageHeaders = $message->getHeaders();
@@ -49,6 +49,6 @@ class NewQuestionMail extends Mailable implements NewQuestionMailContract
                     $messageHeaders->addTextHeader($header, $value);
                 }
             })
-            ->view('admin.module.faq.questions::mails.question_expert', ['question' => $this->question]);
+            ->view('admin.module.faq.questions::mails.question_user', ['question' => $this->question]);
     }
 }

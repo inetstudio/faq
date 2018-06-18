@@ -3,19 +3,19 @@
 namespace InetStudio\FAQ\Questions\Notifications;
 
 use Illuminate\Notifications\Notification;
-use InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract;
+use InetStudio\FAQ\Questions\Contracts\Mail\AnswerMailContract;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
-use InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionNotificationContract;
+use InetStudio\FAQ\Questions\Contracts\Notifications\AnswerNotificationContract;
 
 /**
- * Class NewQuestionNotification.
+ * Class AnswerNotification.
  */
-class NewQuestionNotification extends Notification implements NewQuestionNotificationContract
+class AnswerNotification extends Notification implements AnswerNotificationContract
 {
     protected $question;
 
     /**
-     * NewCommentNotification constructor.
+     * AnswerNotification constructor.
      *
      * @param QuestionModelContract $question
      */
@@ -28,6 +28,7 @@ class NewQuestionNotification extends Notification implements NewQuestionNotific
      * Get the notification's delivery channels.
      *
      * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable): array
@@ -41,11 +42,12 @@ class NewQuestionNotification extends Notification implements NewQuestionNotific
      * Get the mail representation of the notification.
      *
      * @param $notifiable
-     * @return NewQuestionMailContract
+     *
+     * @return AnswerMailContract
      */
-    public function toMail($notifiable): NewQuestionMailContract
+    public function toMail($notifiable): AnswerMailContract
     {
-        return app()->makeWith('InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract', [
+        return app()->makeWith('InetStudio\FAQ\Questions\Contracts\Mail\AnswerMailContract', [
             'question' => $this->question,
         ]);
     }
@@ -54,6 +56,7 @@ class NewQuestionNotification extends Notification implements NewQuestionNotific
      * Get the array representation of the notification.
      *
      * @param mixed $notifiable
+     *
      * @return array
      */
     public function toDatabase($notifiable): array
