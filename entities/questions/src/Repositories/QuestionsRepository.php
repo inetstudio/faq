@@ -176,7 +176,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
         $builder = $this->getItemsQuery($extColumns, $with)
             ->where('is_active', 1)
             ->orderBy('updated_at', 'desc')
-            ->whereFavoritedBy('faq_questions', $userID);
+            ->whereFavoritedBy('faq_question', $userID);
 
         if ($returnBuilder) {
             return $builder;
