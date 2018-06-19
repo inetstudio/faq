@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Questions\Services\Front;
 
+use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\FAQ\Questions\Contracts\Services\Front\QuestionsServiceContract;
 use InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract;
 
@@ -68,6 +69,18 @@ class QuestionsService implements QuestionsServiceContract
         ];
     }
 
+    /**
+     * Получаем вопрос по ID.
+     *
+     * @param int $id
+     *
+     * @return QuestionModelContract|null
+     */
+    public function getQuestionByID(int $id = 0): ?QuestionModelContract
+    {
+        return $this->repository->searchItems(['question', 'answer', 'updated_at'], ['persons'])->first();
+    }
+    
     /**
      * Получаем активные вопросы.
      *
