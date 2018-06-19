@@ -10,14 +10,16 @@ use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Persons\Models\Traits\HasPersons;
+use InetStudio\Favorites\Models\Traits\Favoritable;
 use InetStudio\Classifiers\Models\Traits\HasClassifiers;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
+use InetStudio\Favorites\Contracts\Models\Traits\FavoritableContract;
 
 /**
  * Class QuestionModel.
  */
-class QuestionModel extends Model implements QuestionModelContract, HasMediaConversions
+class QuestionModel extends Model implements QuestionModelContract, HasMediaConversions, FavoritableContract
 {
     use HasTags;
     use HasUser;
@@ -25,6 +27,7 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
     use HasPersons;
     use Notifiable;
     use Searchable;
+    use Favoritable;
     use SoftDeletes;
     use HasClassifiers;
 
