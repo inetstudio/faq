@@ -4,7 +4,6 @@ namespace InetStudio\FAQ\Questions\Services\Front;
 
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\FAQ\Questions\Contracts\Services\Front\QuestionsServiceContract;
-use InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract;
 
 /**
  * Class QuestionsService.
@@ -12,24 +11,21 @@ use InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract;
 class QuestionsService implements QuestionsServiceContract
 {
     /**
-     * @var QuestionsRepositoryContract
+     * @var
      */
-    private $repository;
+    public $repository;
 
     /**
      * @var array
      */
-    private $services;
+    public $services;
 
     /**
      * QuestionsService constructor.
-     *
-     * @param QuestionsRepositoryContract $repository
      */
-    public function __construct(QuestionsRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
-        $this->services['classifiers'] = app()->make('InetStudio\Classifiers\Contracts\Services\Back\ClassifiersServiceContract');
+        $this->repository = app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract');
         $this->services['users'] = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
     }
 
@@ -56,8 +52,6 @@ class QuestionsService implements QuestionsServiceContract
         $result = ($question && isset($question->id));
 
         if ($result) {
-            $this->services['classifiers']->attachToObject(request(), $question);
-
             event(app()->makeWith('InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract', [
                 'question' => $question,
             ]));

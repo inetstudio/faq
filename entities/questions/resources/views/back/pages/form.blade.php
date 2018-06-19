@@ -71,16 +71,6 @@
                                         ],
                                     ]) !!}
 
-                                    {!! Form::classifiers('', $item, [
-                                        'label' => [
-                                            'title' => 'Тип кожи',
-                                        ],
-                                        'field' => [
-                                            'placeholder' => 'Выберите типы кожи',
-                                            'type' => 'Тип кожи',
-                                        ],
-                                    ]) !!}
-
                                     {!! Form::wysiwyg('question', $item->question, [
                                         'label' => [
                                             'title' => 'Вопрос',
@@ -90,11 +80,6 @@
                                             'type' => 'simple',
                                             'id' => 'question',
                                         ],
-                                    ]) !!}
-
-                                    {!! Form::persons('', $item, [
-                                        'label' => 'Эксперты',
-                                        'placeholder' => 'Выберите экспертов',
                                     ]) !!}
 
                                     {!! Form::wysiwyg('answer', $item->answer, [

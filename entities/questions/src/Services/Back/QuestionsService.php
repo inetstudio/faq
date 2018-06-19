@@ -6,7 +6,6 @@ use League\Fractal\Manager;
 use Illuminate\Support\Facades\Session;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsServiceContract;
-use InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveQuestionRequestContract;
 
 /**
@@ -15,18 +14,16 @@ use InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveQuestionRequestCon
 class QuestionsService implements QuestionsServiceContract
 {
     /**
-     * @var QuestionsRepositoryContract
+     * @var
      */
-    private $repository;
+    public $repository;
 
     /**
      * QuestionsService constructor.
-     *
-     * @param QuestionsRepositoryContract $repository
      */
-    public function __construct(QuestionsRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->repository = app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract');
     }
 
     /**
@@ -74,12 +71,6 @@ class QuestionsService implements QuestionsServiceContract
             ->attachToObject($request, $item, $images, 'faq_questions', 'question');
 
         app()->make('InetStudio\FAQ\Tags\Contracts\Services\Back\TagsServiceContract')
-            ->attachToObject($request, $item);
-
-        app()->make('InetStudio\Classifiers\Contracts\Services\Back\ClassifiersServiceContract')
-            ->attachToObject($request, $item);
-
-        app()->make('InetStudio\Persons\Contracts\Services\Back\PersonsServiceContract')
             ->attachToObject($request, $item);
 
         $item->searchable();

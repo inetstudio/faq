@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "inetstudio/admin-panel": "1.6.*",
-        "inetstudio/persons": "1.6.*"
+        "arcanedev/no-captcha": "^6.0",
+        "inetstudio/admin-panel": "1.6.*"
     },
     "autoload": {
       "psr-4": {
