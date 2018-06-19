@@ -29,6 +29,7 @@ class TagsBindingsServiceProvider extends ServiceProvider
 
         // Repositories
         'InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract' => 'InetStudio\FAQ\Tags\Repositories\TagsRepository',
+        'InetStudio\FAQ\Tags\Contracts\Repositories\TaggablesRepositoryContract' => 'InetStudio\FAQ\Tags\Repositories\TaggablesRepository',
 
         // Requests
         'InetStudio\FAQ\Tags\Contracts\Http\Requests\Back\SaveTagRequestContract' => 'InetStudio\FAQ\Tags\Http\Requests\Back\SaveTagRequest',
@@ -68,6 +69,7 @@ class TagsBindingsServiceProvider extends ServiceProvider
             'InetStudio\FAQ\Tags\Contracts\Models\TaggableModelContract',
             'InetStudio\FAQ\Tags\Contracts\Observers\TagObserverContract',
             'InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract',
+            'InetStudio\FAQ\Tags\Contracts\Repositories\TaggablesRepositoryContract',
             'InetStudio\FAQ\Tags\Contracts\Http\Requests\Back\SaveTagRequestContract',
             'InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\DestroyResponseContract',
             'InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\FormResponseContract',

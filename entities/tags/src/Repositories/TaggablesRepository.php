@@ -1,27 +1,27 @@
 <?php
 
-namespace InetStudio\FAQ\Questions\Repositories;
+namespace InetStudio\FAQ\Tags\Repositories;
 
 use Illuminate\Database\Eloquent\Builder;
-use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
-use InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract;
+use InetStudio\FAQ\Tags\Contracts\Models\TaggableModelContract;
+use InetStudio\FAQ\Tags\Contracts\Repositories\TaggablesRepositoryContract;
 
 /**
- * Class QuestionsRepository.
+ * Class TaggablesRepository.
  */
-class QuestionsRepository implements QuestionsRepositoryContract
+class TaggablesRepository implements TaggablesRepositoryContract
 {
     /**
-     * @var QuestionModelContract
+     * @var TaggableModelContract
      */
     private $model;
 
     /**
-     * TagsRepository constructor.
+     * TaggablesRepository constructor.
      *
-     * @param QuestionModelContract $model
+     * @param TaggableModelContract $model
      */
-    public function __construct(QuestionModelContract $model)
+    public function __construct(TaggableModelContract $model)
     {
         $this->model = $model;
     }
@@ -29,7 +29,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
     /**
      * Получаем модель репозитория.
      *
-     * @return QuestionModelContract
+     * @return TaggableModelContract
      */
     public function getModel()
     {
@@ -41,9 +41,9 @@ class QuestionsRepository implements QuestionsRepositoryContract
      *
      * @param int $id
      *
-     * @return QuestionModelContract
+     * @return TaggableModelContract
      */
-    public function getItemByID(int $id): QuestionModelContract
+    public function getItemByID(int $id): TaggableModelContract
     {
         return $this->model::find($id) ?? new $this->model;
     }
@@ -75,9 +75,9 @@ class QuestionsRepository implements QuestionsRepositoryContract
      * @param array $data
      * @param int $id
      *
-     * @return QuestionModelContract
+     * @return TaggableModelContract
      */
-    public function save(array $data, int $id): QuestionModelContract
+    public function save(array $data, int $id): TaggableModelContract
     {
         $item = $this->getItemByID($id);
         $item->fill($data);
@@ -140,28 +140,6 @@ class QuestionsRepository implements QuestionsRepositoryContract
     }
 
     /**
-     * Получаем активные объекты.
-     *
-     * @param array $extColumns
-     * @param array $with
-     * @param bool $returnBuilder
-     *
-     * @return mixed
-     */
-    public function getActiveItems(array $extColumns = [], array $with = [], bool $returnBuilder = false)
-    {
-        $builder = $this->getItemsQuery($extColumns, $with)
-            ->where('is_active', 1)
-            ->orderBy('updated_at', 'desc');
-
-        if ($returnBuilder) {
-            return $builder;
-        }
-
-        return $builder->get();
-    }
-
-    /**
      * Возвращаем запрос на получение объектов.
      *
      * @param array $extColumns
@@ -169,18 +147,11 @@ class QuestionsRepository implements QuestionsRepositoryContract
      *
      * @return Builder
      */
-    protected function getItemsQuery($extColumns = [], $with = []): Builder
+    protected function getItemsQuery(array $extColumns = [], array $with = []): Builder
     {
-        $defaultColumns = ['id', 'is_active'];
+        $defaultColumns = ['id', 'name', 'title'];
 
-        $relations = [
-            'persons' => function ($query) {
-                $query->select(['id', 'name', 'slug'])
-                    ->with(['media' => function ($query) {
-                        $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk']);
-                    }]);
-            },
-        ];
+        $relations = [];
 
         return $this->model::select(array_merge($defaultColumns, $extColumns))
             ->with(array_intersect_key($relations, array_flip($with)));

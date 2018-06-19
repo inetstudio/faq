@@ -31,6 +31,8 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
     use SoftDeletes;
     use HasClassifiers;
 
+    const MATERIAL_TYPE = 'faq_question';
+
     protected $images = [
         'config' => 'faq_questions',
         'model' => 'question',
@@ -96,19 +98,6 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
     }
 
     /**
-     * Обратное отношение с моделью персоны.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function person()
-    {
-        return $this->belongsTo(
-            app()->make('InetStudio\Persons\Contracts\Models\PersonModelContract'),
-            'person_id'
-        );
-    }
-
-    /**
      * Заготовка запроса "Непрочитанные вопросы".
      *
      * @param $query
@@ -142,5 +131,15 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
     public function scopeInactive($query)
     {
         return $query->where('is_active', 0);
+    }
+
+    /**
+     * Тип материала.
+     *
+     * @return string
+     */
+    public function getTypeAttribute()
+    {
+        return self::MATERIAL_TYPE;
     }
 }

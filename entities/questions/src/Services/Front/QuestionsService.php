@@ -67,4 +67,14 @@ class QuestionsService implements QuestionsServiceContract
             'message' => ($result) ? trans('admin.module.faq.questions::questions.send_success') : trans('admin.module.faq.questions::questions.send_fail'),
         ];
     }
+
+    /**
+     * Получаем активные вопросы.
+     *
+     * @return mixed
+     */
+    public function getActiveQuestions()
+    {
+        return $this->repository->getActiveItems(['question', 'answer', 'updated_at'], ['persons']);
+    }
 }
