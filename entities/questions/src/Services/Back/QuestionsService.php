@@ -19,11 +19,19 @@ class QuestionsService implements QuestionsServiceContract
     public $repository;
 
     /**
+     * @var array
+     */
+    public $services = [];
+
+    /**
      * QuestionsService constructor.
      */
     public function __construct()
     {
         $this->repository = app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract');
+
+        $this->services['images'] = app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract');
+        $this->services['tags'] = app()->make('InetStudio\FAQ\Tags\Contracts\Services\Back\TagsServiceContract');
     }
 
     /**
@@ -67,11 +75,8 @@ class QuestionsService implements QuestionsServiceContract
         $item = $this->repository->save($request->only($this->repository->getModel()->getFillable()), $id);
 
         $images = (config('faq_questions.images.conversions.question')) ? array_keys(config('faq_questions.images.conversions.question')) : [];
-        app()->make('InetStudio\Uploads\Contracts\Services\Back\ImagesServiceContract')
-            ->attachToObject($request, $item, $images, 'faq_questions', 'question');
-
-        app()->make('InetStudio\FAQ\Tags\Contracts\Services\Back\TagsServiceContract')
-            ->attachToObject($request, $item);
+        $this->services['images']->attachToObject($request, $item, $images, 'faq_questions', 'question');
+        $this->services['tags']->attachToObject($request, $item);
 
         $item->searchable();
 
