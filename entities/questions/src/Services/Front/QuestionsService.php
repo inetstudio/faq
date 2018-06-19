@@ -77,4 +77,19 @@ class QuestionsService implements QuestionsServiceContract
     {
         return $this->repository->getActiveItems(['question', 'answer', 'updated_at'], ['persons']);
     }
+
+
+    /**
+     * Получаем избранные вопросы.
+     *
+     * @param $userID
+     *
+     * @return mixed
+     */
+    public function getQuestionsFavoritedByUser($userID)
+    {
+        return ($userID)
+            ? $this->repository->getItemsFavoritedByUser($userID, ['question', 'answer', 'updated_at'], ['persons'])
+            : collect([]);
+    }
 }

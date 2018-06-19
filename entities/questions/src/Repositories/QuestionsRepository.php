@@ -162,6 +162,30 @@ class QuestionsRepository implements QuestionsRepositoryContract
     }
 
     /**
+     * Получаем избранные объекты.
+     *
+     * @param $userID
+     * @param array $extColumns
+     * @param array $with
+     * @param bool $returnBuilder
+     *
+     * @return mixed
+     */
+    public function getItemsFavoritedByUser($userID, array $extColumns = [], array $with = [], bool $returnBuilder = false)
+    {
+        $builder = $this->getItemsQuery($extColumns, $with)
+            ->where('is_active', 1)
+            ->orderBy('updated_at', 'desc')
+            ->whereFavoritedBy('faq_questions', $userID);
+
+        if ($returnBuilder) {
+            return $builder;
+        }
+
+        return $builder->get();
+    }
+
+    /**
      * Возвращаем запрос на получение объектов.
      *
      * @param array $extColumns
