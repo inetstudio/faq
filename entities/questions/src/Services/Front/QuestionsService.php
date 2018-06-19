@@ -78,9 +78,9 @@ class QuestionsService implements QuestionsServiceContract
      */
     public function getQuestionByID(int $id = 0): ?QuestionModelContract
     {
-        return $this->repository->searchItems(['question', 'answer', 'updated_at'], ['persons'])->first();
+        return $this->repository->searchItems([['id', '=', $id]], ['question', 'answer', 'updated_at'], ['persons'])->first();
     }
-    
+
     /**
      * Получаем активные вопросы.
      *
