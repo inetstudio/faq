@@ -72,7 +72,7 @@ class QuestionsService implements QuestionsServiceContract
      */
     public function getQuestionByID(int $id = 0): ?QuestionModelContract
     {
-        return $this->repository->searchItems([['id', '=', $id]], ['question', 'answer', 'updated_at'], ['persons'])->first();
+        return $this->repository->searchItems([['id', '=', $id]], ['question', 'answer', 'updated_at'], ['tags'])->first();
     }
 
     /**
@@ -82,7 +82,7 @@ class QuestionsService implements QuestionsServiceContract
      */
     public function getActiveQuestions()
     {
-        return $this->repository->getActiveItems(['question', 'answer', 'updated_at'], ['persons']);
+        return $this->repository->getActiveItems(['question', 'answer', 'updated_at'], ['tags']);
     }
 
     /**
@@ -94,9 +94,8 @@ class QuestionsService implements QuestionsServiceContract
      */
     public function getQuestionsByTags(array $tags)
     {
-        return $this->repository->getItemsByTags($tags, ['question', 'answer', 'updated_at'], ['persons']);
+        return $this->repository->getItemsByTags($tags, ['question', 'answer', 'updated_at'], ['tags']);
     }
-
 
     /**
      * Получаем избранные вопросы.
@@ -108,7 +107,7 @@ class QuestionsService implements QuestionsServiceContract
     public function getQuestionsFavoritedByUser($userID)
     {
         return ($userID)
-            ? $this->repository->getItemsFavoritedByUser($userID, ['question', 'answer', 'updated_at'], ['persons'])
+            ? $this->repository->getItemsFavoritedByUser($userID, ['question', 'answer', 'updated_at'], ['tags'])
             : collect([]);
     }
 }

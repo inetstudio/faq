@@ -14,7 +14,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
     /**
      * @var QuestionModelContract
      */
-    private $model;
+    public $model;
 
     /**
      * TagsRepository constructor.
@@ -217,16 +217,13 @@ class QuestionsRepository implements QuestionsRepositoryContract
      *
      * @return Builder
      */
-    protected function getItemsQuery($extColumns = [], $with = []): Builder
+    public function getItemsQuery($extColumns = [], $with = []): Builder
     {
         $defaultColumns = ['id', 'is_active'];
 
         $relations = [
-            'persons' => function ($query) {
-                $query->select(['id', 'name', 'slug'])
-                    ->with(['media' => function ($query) {
-                        $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk']);
-                    }]);
+            'tags' => function ($query) {
+                $query->select(['id', 'name', 'alias']);
             },
         ];
 
