@@ -223,7 +223,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
 
         $relations = [
             'tags' => function ($query) {
-                $query->select(['id', 'name', 'alias']);
+                $query->select(['id', 'name', 'title']);
             },
         ];
 

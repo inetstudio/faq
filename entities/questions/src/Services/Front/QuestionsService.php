@@ -98,6 +98,20 @@ class QuestionsService implements QuestionsServiceContract
     }
 
     /**
+     * Возвращаем используемые теги.
+     *
+     * @return mixed
+     */
+    public function getQuestionsTags()
+    {
+        $questions = $this->getActiveQuestions();
+
+        return $questions->map(function ($item) {
+            return $item->tags;
+        })->collapse()->unique('id');
+    }
+
+    /**
      * Получаем избранные вопросы.
      *
      * @param $userID
