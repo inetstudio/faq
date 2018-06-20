@@ -162,6 +162,30 @@ class QuestionsRepository implements QuestionsRepositoryContract
     }
 
     /**
+     * Получаем объекты по тегам.
+     *
+     * @param array $tags
+     * @param array $extColumns
+     * @param array $with
+     * @param bool $returnBuilder
+     *
+     * @return mixed
+     */
+    public function getItemsByTags(array $tags, array $extColumns = [], array $with = [], bool $returnBuilder = false)
+    {
+        $builder = $this->getItemsQuery($extColumns, $with)
+            ->where('is_active', 1)
+            ->orderBy('updated_at', 'desc')
+            ->withAnyTags($tags);
+
+        if ($returnBuilder) {
+            return $builder;
+        }
+
+        return $builder->get();
+    }
+
+    /**
      * Получаем избранные объекты.
      *
      * @param $userID

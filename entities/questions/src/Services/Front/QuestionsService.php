@@ -85,6 +85,18 @@ class QuestionsService implements QuestionsServiceContract
         return $this->repository->getActiveItems(['question', 'answer', 'updated_at'], ['persons']);
     }
 
+    /**
+     * Получаем вопросы по тегам.
+     *
+     * @param array $tags
+     *
+     * @return mixed
+     */
+    public function getQuestionsByTags(array $tags)
+    {
+        return $this->repository->getItemsByTags($tags, ['question', 'answer', 'updated_at'], ['persons']);
+    }
+
 
     /**
      * Получаем избранные вопросы.
