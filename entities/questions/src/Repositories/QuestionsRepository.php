@@ -151,7 +151,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
     public function getActiveItems(array $extColumns = [], array $with = [], bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery($extColumns, $with)
-            ->where('is_active', 1)
+            ->active()
             ->orderBy('updated_at', 'desc');
 
         if ($returnBuilder) {
@@ -174,7 +174,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
     public function getItemsByTags(array $tags, array $extColumns = [], array $with = [], bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery($extColumns, $with)
-            ->where('is_active', 1)
+            ->active()
             ->orderBy('updated_at', 'desc')
             ->withAnyTags($tags);
 
@@ -198,7 +198,7 @@ class QuestionsRepository implements QuestionsRepositoryContract
     public function getItemsFavoritedByUser($userID, array $extColumns = [], array $with = [], bool $returnBuilder = false)
     {
         $builder = $this->getItemsQuery($extColumns, $with)
-            ->where('is_active', 1)
+            ->active()
             ->orderBy('updated_at', 'desc')
             ->whereFavoritedBy('faq_question', $userID);
 
