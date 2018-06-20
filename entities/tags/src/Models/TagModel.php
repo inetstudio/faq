@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Tags\Models;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\FAQ\Tags\Contracts\Models\TagModelContract;
@@ -11,6 +12,7 @@ use InetStudio\FAQ\Tags\Contracts\Models\TagModelContract;
  */
 class TagModel extends Model implements TagModelContract
 {
+    use Searchable;
     use SoftDeletes;
 
     /**
@@ -48,5 +50,17 @@ class TagModel extends Model implements TagModelContract
     public function taggables()
     {
         return $this->hasMany(app()->make('InetStudio\FAQ\Tags\Contracts\Models\TaggableModelContract'), 'tag_model_id');
+    }
+
+    /**
+     * Настройка полей для поиска.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $arr = array_only($this->toArray(), ['id', 'name', 'title']);
+
+        return $arr;
     }
 }

@@ -94,6 +94,10 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
     {
         $arr = array_only($this->toArray(), ['id', 'question', 'answer']);
 
+        $arr['tags'] = $this->tags->map(function ($item) {
+            return array_only($item->toSearchableArray(), ['id', 'title']);
+        })->toArray();
+
         return $arr;
     }
 
