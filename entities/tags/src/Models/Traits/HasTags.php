@@ -103,7 +103,7 @@ trait HasTags
     public function scopeWithAllTags(Builder $query, $tags, string $column = 'id'): Builder
     {
         $tags = static::isTagsStringBased($tags)
-            ? $tags : static::hydrateTags($tags)->pluck($column);
+            ? $tags : static::hydrateTags($tags)->pluck($column)->toArray();
 
         collect($tags)->each(function ($tag) use ($query, $column) {
             $query->whereHas('tags', function (Builder $query) use ($tag, $column) {
@@ -126,7 +126,7 @@ trait HasTags
     public function scopeWithAnyTags(Builder $query, $tags, string $column = 'id'): Builder
     {
         $tags = static::isTagsStringBased($tags)
-            ? $tags : static::hydrateTags($tags)->pluck($column);
+            ? $tags : static::hydrateTags($tags)->pluck($column)->toArray();
 
         return $query->whereHas('tags', function (Builder $query) use ($tags, $column) {
             $query->whereIn($column, (array) $tags);
@@ -159,7 +159,7 @@ trait HasTags
     public function scopeWithoutTags(Builder $query, $tags, string $column = 'id'): Builder
     {
         $tags = static::isTagsStringBased($tags)
-            ? $tags : static::hydrateTags($tags)->pluck($column);
+            ? $tags : static::hydrateTags($tags)->pluck($column)->toArray();
 
         return $query->whereDoesntHave('tags', function (Builder $query) use ($tags, $column) {
             $query->whereIn($column, (array) $tags);
