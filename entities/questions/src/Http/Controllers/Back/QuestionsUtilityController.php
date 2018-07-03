@@ -18,7 +18,7 @@ class QuestionsUtilityController extends Controller implements QuestionsUtilityC
      *
      * @var array
      */
-    protected $services;
+    public $services;
 
     /**
      * QuestionsUtilityController constructor.

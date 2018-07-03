@@ -147,7 +147,7 @@ class TagsRepository implements TagsRepositoryContract
      *
      * @return Builder
      */
-    protected function getItemsQuery(array $extColumns = [], array $with = []): Builder
+    public function getItemsQuery(array $extColumns = [], array $with = []): Builder
     {
         $defaultColumns = ['id', 'name', 'title'];
 

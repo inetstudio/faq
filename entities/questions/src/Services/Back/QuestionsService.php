@@ -14,14 +14,16 @@ use InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveQuestionRequestCon
 class QuestionsService implements QuestionsServiceContract
 {
     /**
-     * @var
-     */
-    public $repository;
-
-    /**
+     * Используемые сервисы.
+     *
      * @var array
      */
     public $services = [];
+
+    /**
+     * @var
+     */
+    public $repository;
 
     /**
      * QuestionsService constructor.

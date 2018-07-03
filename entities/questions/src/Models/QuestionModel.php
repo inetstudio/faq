@@ -11,7 +11,6 @@ use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Persons\Models\Traits\HasPersons;
 use InetStudio\Favorites\Models\Traits\Favoritable;
-use InetStudio\Classifiers\Models\Traits\HasClassifiers;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\Favorites\Contracts\Models\Traits\FavoritableContract;
@@ -29,9 +28,8 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
     use Searchable;
     use Favoritable;
     use SoftDeletes;
-    use HasClassifiers;
 
-    const MATERIAL_TYPE = 'faq_question';
+    const ENTITY_TYPE = 'faq_question';
 
     protected $images = [
         'config' => 'faq_questions',
@@ -144,6 +142,6 @@ class QuestionModel extends Model implements QuestionModelContract, HasMediaConv
      */
     public function getTypeAttribute()
     {
-        return self::MATERIAL_TYPE;
+        return self::ENTITY_TYPE;
     }
 }

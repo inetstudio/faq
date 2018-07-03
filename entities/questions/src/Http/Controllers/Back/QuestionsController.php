@@ -21,7 +21,7 @@ class QuestionsController extends Controller implements QuestionsControllerContr
      *
      * @var array
      */
-    protected $services;
+    public $services;
 
     /**
      * QuestionsController constructor.

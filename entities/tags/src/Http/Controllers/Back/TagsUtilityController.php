@@ -17,7 +17,7 @@ class TagsUtilityController extends Controller implements TagsUtilityControllerC
      *
      * @var array
      */
-    protected $services;
+    public $services;
 
     /**
      * MessagesController constructor.

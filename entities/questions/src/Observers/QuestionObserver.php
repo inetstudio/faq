@@ -15,7 +15,7 @@ class QuestionObserver implements QuestionObserverContract
      *
      * @var array
      */
-    protected $services;
+    public $services;
 
     /**
      * QuestionObserver constructor.

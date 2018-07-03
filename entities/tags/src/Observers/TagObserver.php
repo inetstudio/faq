@@ -15,7 +15,7 @@ class TagObserver implements TagObserverContract
      *
      * @var array
      */
-    protected $services;
+    public $services;
 
     /**
      * TagObserver constructor.
