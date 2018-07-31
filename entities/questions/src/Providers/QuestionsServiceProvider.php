@@ -25,16 +25,6 @@ class QuestionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Регистрация привязки в контейнере.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->registerBindings();
-    }
-
-    /**
      * Регистрация команд.
      *
      * @return void
@@ -112,66 +102,5 @@ class QuestionsServiceProvider extends ServiceProvider
     public function registerObservers(): void
     {
         $this->app->make('InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract')::observe($this->app->make('InetStudio\FAQ\Questions\Contracts\Observers\QuestionObserverContract'));
-    }
-
-    /**
-     * Регистрация привязок, алиасов и сторонних провайдеров сервисов.
-     *
-     * @return void
-     */
-    protected function registerBindings(): void
-    {
-        // Controllers
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsControllerContract', 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsController');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsDataControllerContract', 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsDataController');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsUtilityControllerContract', 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsUtilityController');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Controllers\Front\QuestionsControllerContract', 'InetStudio\FAQ\Questions\Http\Controllers\Front\QuestionsController');
-
-        // Events
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyQuestionEventContract', 'InetStudio\FAQ\Questions\Events\Back\ModifyQuestionEvent');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract', 'InetStudio\FAQ\Questions\Events\Front\SendQuestionEvent');
-
-        // Mails
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Mail\AnswerMailContract', 'InetStudio\FAQ\Questions\Mail\AnswerMail');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract', 'InetStudio\FAQ\Questions\Mail\NewQuestionMail');
-
-        // Models
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract', 'InetStudio\FAQ\Questions\Models\QuestionModel');
-
-        // Notifications
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Notifications\AnswerNotificationContract', 'InetStudio\FAQ\Questions\Notifications\AnswerNotification');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionNotificationContract', 'InetStudio\FAQ\Questions\Notifications\NewQuestionNotification');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Notifications\AnswerQueueableNotificationContract', 'InetStudio\FAQ\Questions\Notifications\AnswerQueueableNotification');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionQueueableNotificationContract', 'InetStudio\FAQ\Questions\Notifications\NewQuestionQueueableNotification');
-
-        // Observers
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Observers\QuestionObserverContract', 'InetStudio\FAQ\Questions\Observers\QuestionObserver');
-
-        // Repositories
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract', 'InetStudio\FAQ\Questions\Repositories\QuestionsRepository');
-
-        // Requests
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveQuestionRequestContract', 'InetStudio\FAQ\Questions\Http\Requests\Back\SaveQuestionRequest');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Requests\Front\SaveQuestionRequestContract', 'InetStudio\FAQ\Questions\Http\Requests\Front\SaveQuestionRequest');
-
-        // Responses
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\DestroyResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\DestroyResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\FormResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\FormResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\IndexResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\IndexResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\SaveResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\SaveResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\ShowResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\ShowResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Utility\ActivityResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Utility\ActivityResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Back\Utility\SuggestionsResponse');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Http\Responses\Front\SaveResponseContract', 'InetStudio\FAQ\Questions\Http\Responses\Front\SaveResponse');
-
-        // Services
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsDataTableServiceContract', 'InetStudio\FAQ\Questions\Services\Back\QuestionsDataTableService');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsObserverServiceContract', 'InetStudio\FAQ\Questions\Services\Back\QuestionsObserverService');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsServiceContract', 'InetStudio\FAQ\Questions\Services\Back\QuestionsService');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Services\Front\QuestionsServiceContract', 'InetStudio\FAQ\Questions\Services\Front\QuestionsService');
-
-        // Transformers
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Transformers\Back\QuestionTransformerContract', 'InetStudio\FAQ\Questions\Transformers\Back\QuestionTransformer');
-        $this->app->bind('InetStudio\FAQ\Questions\Contracts\Transformers\Back\SuggestionTransformerContract', 'InetStudio\FAQ\Questions\Transformers\Back\SuggestionTransformer');
     }
 }

@@ -23,16 +23,6 @@ class TagsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Регистрация привязки в контейнере.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->registerBindings();
-    }
-
-    /**
      * Регистрация команд.
      *
      * @return void
@@ -81,53 +71,5 @@ class TagsServiceProvider extends ServiceProvider
     protected function registerViews(): void
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'admin.module.faq.tags');
-    }
-
-    /**
-     * Регистрация привязок, алиасов и сторонних провайдеров сервисов.
-     *
-     * @return void
-     */
-    protected function registerBindings(): void
-    {
-        // Controllers
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Controllers\Back\TagsControllerContract', 'InetStudio\FAQ\Tags\Http\Controllers\Back\TagsController');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Controllers\Back\TagsDataControllerContract', 'InetStudio\FAQ\Tags\Http\Controllers\Back\TagsDataController');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Controllers\Back\TagsUtilityControllerContract', 'InetStudio\FAQ\Tags\Http\Controllers\Back\TagsUtilityController');
-
-        // Events
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Events\Back\ModifyTagEventContract', 'InetStudio\FAQ\Tags\Events\Back\ModifyTagEvent');
-
-        // Models
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Models\TagModelContract', 'InetStudio\FAQ\Tags\Models\TagModel');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Models\TaggableModelContract', 'InetStudio\FAQ\Tags\Models\TaggableModel');
-
-        // Observers
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Observers\TagObserverContract', 'InetStudio\FAQ\Tags\Observers\TagObserver');
-
-        // Repositories
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract', 'InetStudio\FAQ\Tags\Repositories\TagsRepository');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Repositories\TaggablesRepositoryContract', 'InetStudio\FAQ\Tags\Repositories\TaggablesRepository');
-
-        // Requests
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Requests\Back\SaveTagRequestContract', 'InetStudio\FAQ\Tags\Http\Requests\Back\SaveTagRequest');
-
-        // Responses
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\DestroyResponseContract', 'InetStudio\FAQ\Tags\Http\Responses\Back\Tags\DestroyResponse');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\FormResponseContract', 'InetStudio\FAQ\Tags\Http\Responses\Back\Tags\FormResponse');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\IndexResponseContract', 'InetStudio\FAQ\Tags\Http\Responses\Back\Tags\IndexResponse');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\SaveResponseContract', 'InetStudio\FAQ\Tags\Http\Responses\Back\Tags\SaveResponse');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Tags\ShowResponseContract', 'InetStudio\FAQ\Tags\Http\Responses\Back\Tags\ShowResponse');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract', 'InetStudio\FAQ\Tags\Http\Responses\Back\Utility\SuggestionsResponse');
-
-        // Services
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Services\Back\TagsDataTableServiceContract', 'InetStudio\FAQ\Tags\Services\Back\TagsDataTableService');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Services\Back\TagsObserverServiceContract', 'InetStudio\FAQ\Tags\Services\Back\TagsObserverService');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Services\Back\TagsServiceContract', 'InetStudio\FAQ\Tags\Services\Back\TagsService');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Services\Front\TagsServiceContract', 'InetStudio\FAQ\Tags\Services\Front\TagsService');
-
-        // Transformers
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Transformers\Back\TagTransformerContract', 'InetStudio\FAQ\Tags\Transformers\Back\TagTransformer');
-        $this->app->bind('InetStudio\FAQ\Tags\Contracts\Transformers\Back\SuggestionTransformerContract', 'InetStudio\FAQ\Tags\Transformers\Back\SuggestionTransformer');
     }
 }

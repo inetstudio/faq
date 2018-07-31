@@ -24,8 +24,10 @@
         "laravel": {
             "providers": [
                 "InetStudio\\FAQ\\Providers\\FAQServiceProvider",
+                "InetStudio\\FAQ\\Questions\\Providers\\QuestionsBindingsServiceProvider",
                 "InetStudio\\FAQ\\Questions\\Providers\\QuestionsServiceProvider",
                 "InetStudio\\FAQ\\Tags\\Providers\\FormBuilderServiceProvider",
+                "InetStudio\\FAQ\\Tags\\Providers\\TagsBindingsServiceProvider",
                 "InetStudio\\FAQ\\Tags\\Providers\\TagsServiceProvider"
             ]
         }
