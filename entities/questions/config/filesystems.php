@@ -9,8 +9,8 @@ return [
 
     'faq_questions' => [
         'driver' => 'local',
-        'root' => storage_path('app/public/faq_questions/'),
-        'url' => env('APP_URL').'/storage/faq_questions/',
+        'root' => storage_path('app/public/faq_questions'),
+        'url' => env('APP_URL').'/storage/faq_questions',
         'visibility' => 'public',
     ],
 
