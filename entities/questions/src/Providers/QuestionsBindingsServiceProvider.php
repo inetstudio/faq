@@ -25,7 +25,6 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
         'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsUtilityControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsUtilityController',
         'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Front\QuestionsControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Front\QuestionsController',
         'InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveQuestionRequestContract' => 'InetStudio\FAQ\Questions\Http\Requests\Back\SaveQuestionRequest',
-        'InetStudio\FAQ\Questions\Contracts\Http\Requests\Front\SaveQuestionRequestContract' => 'InetStudio\FAQ\Questions\Http\Requests\Front\SaveQuestionRequest',
         'InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\DestroyResponseContract' => 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\DestroyResponse',
         'InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\FormResponseContract' => 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\FormResponse',
         'InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Questions\IndexResponseContract' => 'InetStudio\FAQ\Questions\Http\Responses\Back\Questions\IndexResponse',
