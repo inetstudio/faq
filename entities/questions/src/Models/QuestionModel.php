@@ -5,20 +5,20 @@ namespace InetStudio\FAQ\Questions\Models;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Persons\Models\Traits\HasPersons;
 use InetStudio\Favorites\Models\Traits\Favoritable;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\Favorites\Contracts\Models\Traits\FavoritableContract;
 
 /**
  * Class QuestionModel.
  */
-class QuestionModel extends Model implements QuestionModelContract, HasMediaConversions, FavoritableContract
+class QuestionModel extends Model implements QuestionModelContract, HasMedia, FavoritableContract
 {
     use HasTags;
     use HasUser;
