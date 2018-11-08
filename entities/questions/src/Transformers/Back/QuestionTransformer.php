@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Questions\Transformers\Back;
 
+use Illuminate\Support\Str;
 use League\Fractal\TransformerAbstract;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\FAQ\Questions\Contracts\Transformers\Back\QuestionTransformerContract;
@@ -31,6 +32,9 @@ class QuestionTransformer extends TransformerAbstract implements QuestionTransfo
                 'id' => $item->id,
                 'is_active' => $item->is_active,
             ])->render(),
+            'name' => $item->name,
+            'email' => $item->email,
+            'question' => Str::limit($item->question, 150, '...'),
             'created_at' => (string) $item->created_at,
             'updated_at' => (string) $item->updated_at,
             'actions' => view('admin.module.faq.questions::back.partials.datatables.actions', [

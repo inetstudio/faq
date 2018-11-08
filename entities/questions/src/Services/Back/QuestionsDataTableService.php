@@ -53,7 +53,7 @@ class QuestionsDataTableService extends DataTable implements QuestionsDataTableS
     public function query()
     {
         $query = $this->repository->getAllItems([], [], true)
-            ->addSelect(['is_read'])
+            ->addSelect(['is_read', 'name', 'email', 'question'])
             ->with([]);
 
         return $query;
@@ -84,6 +84,9 @@ class QuestionsDataTableService extends DataTable implements QuestionsDataTableS
         return [
             ['data' => 'read', 'name' => 'is_read', 'title' => 'Непрочитано', 'searchable' => false],
             ['data' => 'active', 'name' => 'is_active', 'title' => 'Активность', 'searchable' => false],
+            ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
+            ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
+            ['data' => 'question', 'name' => 'quiestion', 'title' => 'Вопрос'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
             ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Дата обновления'],
             ['data' => 'actions', 'name' => 'actions', 'title' => 'Действия', 'orderable' => false, 'searchable' => false],
@@ -113,6 +116,10 @@ class QuestionsDataTableService extends DataTable implements QuestionsDataTableS
         $i18n = trans('admin::datatables');
 
         return [
+            'order' => [
+                5,
+                'desc'
+            ],
             'paging' => true,
             'pagingType' => 'full_numbers',
             'searching' => true,
