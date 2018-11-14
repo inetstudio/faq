@@ -5,7 +5,6 @@ namespace InetStudio\FAQ\Questions\Services\Back;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
-use InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract;
 use InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsDataTableServiceContract;
 
 /**
@@ -14,18 +13,16 @@ use InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsDataTableServiceCo
 class QuestionsDataTableService extends DataTable implements QuestionsDataTableServiceContract
 {
     /**
-     * @var QuestionsRepositoryContract
+     * @var
      */
-    private $repository;
+    public $repository;
 
     /**
      * QuestionsDataTableService constructor.
-     *
-     * @param QuestionsRepositoryContract $repository
      */
-    public function __construct(QuestionsRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->repository = app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract');
     }
 
     /**
@@ -52,9 +49,9 @@ class QuestionsDataTableService extends DataTable implements QuestionsDataTableS
      */
     public function query()
     {
-        $query = $this->repository->getAllItems([], [], true)
-            ->addSelect(['is_read', 'name', 'email', 'question'])
-            ->with([]);
+        $query = $this->repository->getItemsQuery([
+            'columns' => ['is_read', 'name', 'email', 'question', 'created_at', 'updated_at'],
+        ]);
 
         return $query;
     }

@@ -5,7 +5,6 @@ namespace InetStudio\FAQ\Tags\Services\Back;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
-use InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract;
 use InetStudio\FAQ\Tags\Contracts\Services\Back\TagsDataTableServiceContract;
 
 /**
@@ -14,18 +13,16 @@ use InetStudio\FAQ\Tags\Contracts\Services\Back\TagsDataTableServiceContract;
 class TagsDataTableService extends DataTable implements TagsDataTableServiceContract
 {
     /**
-     * @var TagsRepositoryContract
+     * @var
      */
-    private $repository;
+    public $repository;
 
     /**
      * TagsDataTableService constructor.
-     *
-     * @param TagsRepositoryContract $repository
      */
-    public function __construct(TagsRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->repository = app()->make('InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract');
     }
 
     /**
@@ -52,7 +49,9 @@ class TagsDataTableService extends DataTable implements TagsDataTableServiceCont
      */
     public function query()
     {
-        $query = $this->repository->getAllItems([], [], true);
+        $query = $this->repository->getItemsQuery([
+            'columns' => ['created_at', 'updated_at'],
+        ]);
 
         return $query;
     }

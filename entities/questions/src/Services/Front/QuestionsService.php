@@ -2,18 +2,18 @@
 
 namespace InetStudio\FAQ\Questions\Services\Front;
 
-use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
+use InetStudio\AdminPanel\Services\Front\BaseService;
+use InetStudio\FAQ\Tags\Services\Front\Traits\TagsServiceTrait;
+use InetStudio\Favorites\Services\Front\Traits\FavoritesServiceTrait;
 use InetStudio\FAQ\Questions\Contracts\Services\Front\QuestionsServiceContract;
 
 /**
  * Class QuestionsService.
  */
-class QuestionsService implements QuestionsServiceContract
+class QuestionsService extends BaseService implements QuestionsServiceContract
 {
-    /**
-     * @var
-     */
-    public $repository;
+    use TagsServiceTrait;
+    use FavoritesServiceTrait;
 
     /**
      * @var array
@@ -25,8 +25,7 @@ class QuestionsService implements QuestionsServiceContract
      */
     public function __construct()
     {
-        $this->repository = app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract');
-        $this->services['users'] = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
+        parent::__construct(app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract'));
     }
 
     /**
@@ -38,7 +37,9 @@ class QuestionsService implements QuestionsServiceContract
      */
     public function save(array $data): array
     {
-        $user = $this->services['users']->getUser();
+        $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
+
+        $user = $usersService->getUser();
 
         $question = $this->repository->save([
             'is_read' => 0,
@@ -64,37 +65,16 @@ class QuestionsService implements QuestionsServiceContract
     }
 
     /**
-     * Получаем вопрос по ID.
-     *
-     * @param int $id
-     *
-     * @return QuestionModelContract|null
-     */
-    public function getQuestionByID(int $id = 0): ?QuestionModelContract
-    {
-        return $this->repository->searchItems([['id', '=', $id]], ['question', 'answer', 'updated_at'], ['tags'])->first();
-    }
-
-    /**
      * Получаем активные вопросы.
      *
      * @return mixed
      */
-    public function getActiveQuestions()
+    public function getActiveItems()
     {
-        return $this->repository->getActiveItems(['question', 'answer', 'updated_at'], ['tags']);
-    }
-
-    /**
-     * Получаем вопросы по тегам.
-     *
-     * @param array $tags
-     *
-     * @return mixed
-     */
-    public function getQuestionsByTags(array $tags)
-    {
-        return $this->repository->getItemsByTags($tags, ['question', 'answer', 'updated_at'], ['tags']);
+        return $this->repository->getActiveItems([
+            'columns' => ['question', 'answer', 'updated_at'],
+            'relations' => ['tags'],
+        ]);
     }
 
     /**
@@ -102,26 +82,12 @@ class QuestionsService implements QuestionsServiceContract
      *
      * @return mixed
      */
-    public function getQuestionsTags()
+    public function getItemsTags()
     {
-        $questions = $this->getActiveQuestions();
+        $questions = $this->getActiveItems();
 
         return $questions->map(function ($item) {
             return $item->tags;
         })->collapse()->unique('id');
-    }
-
-    /**
-     * Получаем избранные вопросы.
-     *
-     * @param $userID
-     *
-     * @return mixed
-     */
-    public function getQuestionsFavoritedByUser($userID)
-    {
-        return ($userID)
-            ? $this->repository->getItemsFavoritedByUser($userID, ['question', 'answer', 'updated_at'], ['tags'])
-            : collect([]);
     }
 }

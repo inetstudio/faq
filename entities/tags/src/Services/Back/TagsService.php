@@ -45,15 +45,13 @@ class TagsService implements TagsServiceContract
      * Получаем объекты по списку id.
      *
      * @param array|int $ids
-     * @param array $extColumns
-     * @param array $with
-     * @param bool $returnBuilder
+     * @param array $params
      *
      * @return mixed
      */
-    public function getTagsByIDs($ids, array $extColumns = [], array $with = [], bool $returnBuilder = false)
+    public function getTagsByIDs($ids, array $params = [])
     {
-        return $this->repository->getItemsByIDs($ids, $extColumns, $with, $returnBuilder);
+        return $this->repository->getItemsByIDs($ids, $params);
     }
 
     /**
@@ -95,15 +93,12 @@ class TagsService implements TagsServiceContract
      *
      * @param string $search
      * @param string $type
-     * @param array $extColumns
-     * @param array $with
-     * @param bool $returnBuilder
      *
      * @return array
      */
-    public function getSuggestions(string $search, string $type, array $extColumns = [], array $with = [], bool $returnBuilder = false): array
+    public function getSuggestions(string $search, string $type): array
     {
-        $items = $this->repository->searchItems([['name', 'LIKE', '%'.$search.'%']], $extColumns, $with, $returnBuilder);
+        $items = $this->repository->searchItems([['title', 'LIKE', '%'.$search.'%']]);
 
         $resource = (app()->makeWith('InetStudio\FAQ\Tags\Contracts\Transformers\Back\SuggestionTransformerContract', [
             'type' => $type,

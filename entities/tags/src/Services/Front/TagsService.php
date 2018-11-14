@@ -2,26 +2,19 @@
 
 namespace InetStudio\FAQ\Tags\Services\Front;
 
+use InetStudio\AdminPanel\Services\Front\BaseService;
 use InetStudio\FAQ\Tags\Contracts\Services\Front\TagsServiceContract;
-use InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract;
 
 /**
  * Class TagsService.
  */
-class TagsService implements TagsServiceContract
+class TagsService extends BaseService implements TagsServiceContract
 {
     /**
-     * @var TagsRepositoryContract
-     */
-    private $repository;
-
-    /**
      * TagsService constructor.
-     *
-     * @param TagsRepositoryContract $repository
      */
-    public function __construct(TagsRepositoryContract $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        parent::__construct(app()->make('InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract'));
     }
 }
