@@ -17,4 +17,20 @@ class TagsService extends BaseService implements TagsServiceContract
     {
         parent::__construct(app()->make('InetStudio\FAQ\Tags\Contracts\Repositories\TagsRepositoryContract'));
     }
+
+    /**
+     * Получаем активные объекты.
+     *
+     * @param array $params
+     *
+     * @return mixed
+     */
+    public function getActiveTags(array $params = [])
+    {
+        $taggablesRepository = app()->make('InetStudio\FAQ\Tags\Contracts\Repositories\TaggablesRepositoryContract');
+
+        $tagsIDs = $taggablesRepository->getUniqueTagsIDs();
+
+        return $this->repository->getItemsByIDs($tagsIDs, $params);
+    }
 }
