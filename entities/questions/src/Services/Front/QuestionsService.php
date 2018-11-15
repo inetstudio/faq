@@ -67,24 +67,27 @@ class QuestionsService extends BaseService implements QuestionsServiceContract
     /**
      * Получаем активные вопросы.
      *
+     * @param array $params
+     *
      * @return mixed
      */
-    public function getActiveItems()
+    public function getActiveItems(array $params = [])
     {
-        return $this->repository->getActiveItems([
-            'columns' => ['question', 'answer', 'updated_at'],
-            'relations' => ['tags'],
-        ]);
+        return $this->repository->getActiveItems($params);
     }
 
     /**
      * Возвращаем используемые теги.
      *
+     * @param array $params
+     *
      * @return mixed
      */
-    public function getItemsTags()
+    public function getItemsTags(array $params = [])
     {
-        $questions = $this->getActiveItems();
+        $questions = $this->getActiveItems(array_merge([
+            'relations' => ['tags'],
+        ], $params));
 
         return $questions->map(function ($item) {
             return $item->tags;
