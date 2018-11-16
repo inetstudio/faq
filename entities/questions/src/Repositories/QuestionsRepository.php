@@ -19,7 +19,7 @@ class QuestionsRepository extends BaseRepository implements QuestionsRepositoryC
     /**
      * @var string
      */
-    protected $favoritesType = 'question';
+    protected $favoritesType = 'faq_question';
 
     /**
      * QuestionsRepository constructor.

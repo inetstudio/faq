@@ -21,7 +21,7 @@ trait TagsServiceTrait
     }
 
     /**
-     * Получаем объекты с любыми категами.
+     * Получаем объекты с любыми тегами.
      *
      * @param $tags
      * @param array $params

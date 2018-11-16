@@ -34,7 +34,7 @@ trait TagsRepositoryTrait
     public function getItemsByAnyTag($tags, array $params = [])
     {
         $builder = $this->getItemsQuery($params)
-            ->withAnyTags($tags, 'faq_tags.slug');
+            ->withAnyTags($tags, 'faq_tags.id');
 
         return $builder->get();
     }
