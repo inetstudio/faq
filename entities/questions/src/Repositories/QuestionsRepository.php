@@ -30,8 +30,12 @@ class QuestionsRepository extends BaseRepository implements QuestionsRepositoryC
     {
         $this->model = $model;
 
-        $this->defaultColumns = ['id', 'is_active'];
+        $this->defaultColumns = ['id', 'is_active', 'name', 'email'];
         $this->relations = [
+            'persons' => function ($query) {
+                $query->select(['id', 'name', 'slug']);
+            },
+
             'tags' => function ($query) {
                 $query->select(['id', 'name', 'title']);
             },

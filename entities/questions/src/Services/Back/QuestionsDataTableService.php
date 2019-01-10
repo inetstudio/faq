@@ -50,7 +50,7 @@ class QuestionsDataTableService extends DataTable implements QuestionsDataTableS
     public function query()
     {
         $query = $this->repository->getItemsQuery([
-            'columns' => ['is_read', 'name', 'email', 'question', 'created_at', 'updated_at'],
+            'columns' => ['is_read', 'question', 'created_at', 'updated_at'],
         ]);
 
         return $query;

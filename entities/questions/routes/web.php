@@ -8,6 +8,7 @@ Route::group([
     Route::any('questions/data', 'QuestionsDataControllerContract@data')->name('back.faq.questions.data.index');
     Route::post('questions/activity/{id}', 'QuestionsUtilityControllerContract@changeActivity')->name('back.faq.questions.activity');
     Route::post('questions/suggestions', 'QuestionsUtilityControllerContract@getSuggestions')->name('back.faq.questions.getSuggestions');
+    Route::get('questions/export', 'QuestionsExportControllerContract@exportQuestions')->name('back.faq.questions.export');
 
     Route::resource('questions', 'QuestionsControllerContract', ['as' => 'back.faq']);
 });

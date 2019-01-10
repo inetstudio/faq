@@ -20,8 +20,10 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
     public $bindings = [
         'InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyQuestionEventContract' => 'InetStudio\FAQ\Questions\Events\Back\ModifyQuestionEvent',
         'InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract' => 'InetStudio\FAQ\Questions\Events\Front\SendQuestionEvent',
+        'InetStudio\FAQ\Questions\Contracts\Exports\QuestionsExportContract' => 'InetStudio\FAQ\Questions\Exports\QuestionsExport',
         'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsController',
         'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsDataControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsDataController',
+        'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsExportControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsExportController',
         'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back\QuestionsUtilityControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Back\QuestionsUtilityController',
         'InetStudio\FAQ\Questions\Contracts\Http\Controllers\Front\QuestionsControllerContract' => 'InetStudio\FAQ\Questions\Http\Controllers\Front\QuestionsController',
         'InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveQuestionRequestContract' => 'InetStudio\FAQ\Questions\Http\Requests\Back\SaveQuestionRequest',
