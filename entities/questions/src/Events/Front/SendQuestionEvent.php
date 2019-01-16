@@ -12,15 +12,15 @@ class SendQuestionEvent implements SendQuestionEventContract
 {
     use SerializesModels;
 
-    public $question;
+    public $object;
 
     /**
      * SendQuestionEvent constructor.
      *
-     * @param $question
+     * @param $object
      */
-    public function __construct($question)
+    public function __construct($object)
     {
-        $this->question = $question;
+        $this->object = $object;
     }
 }

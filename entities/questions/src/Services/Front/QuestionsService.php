@@ -54,7 +54,7 @@ class QuestionsService extends BaseService implements QuestionsServiceContract
 
         if ($result) {
             event(app()->makeWith('InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract', [
-                'question' => $question,
+                'object' => $question,
             ]));
         }
 
