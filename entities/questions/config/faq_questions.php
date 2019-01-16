@@ -32,15 +32,15 @@ return [
         ],
     ],
 
-    'mails_experts' => [
-        'to' => [
-            'bukin@inetstudio.ru',
-        ],
+    'mails_persons' => [
+        'send' => false,
+        'to' => [],
         'subject' => 'Новый вопрос',
         'headers' => [],
     ],
 
     'mails_users' => [
+        'send' => false,
         'subject' => 'Ответ на вопрос',
         'headers' => [],
     ],

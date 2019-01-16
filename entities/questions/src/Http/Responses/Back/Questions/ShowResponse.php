@@ -15,7 +15,7 @@ class ShowResponse implements ShowResponseContract, Responsable
     /**
      * @var QuestionModelContract
      */
-    private $item;
+    protected $item;
 
     /**
      * ShowResponse constructor.

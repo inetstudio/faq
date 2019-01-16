@@ -14,7 +14,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * @var TagModelContract
      */
-    private $item;
+    protected $item;
 
     /**
      * SaveResponse constructor.

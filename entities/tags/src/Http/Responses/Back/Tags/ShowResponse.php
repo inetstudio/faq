@@ -15,7 +15,7 @@ class ShowResponse implements ShowResponseContract, Responsable
     /**
      * @var TagModelContract
      */
-    private $item;
+    protected $item;
 
     /**
      * ShowResponse constructor.

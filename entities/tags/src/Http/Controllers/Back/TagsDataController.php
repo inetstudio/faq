@@ -15,7 +15,7 @@ class TagsDataController extends Controller implements TagsDataControllerContrac
      *
      * @var array
      */
-    private $services;
+    protected $services;
 
     /**
      * TagsController constructor.

@@ -21,7 +21,6 @@ class QuestionsServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerViews();
         $this->registerTranslations();
-        $this->registerObservers();
     }
 
     /**
@@ -92,15 +91,5 @@ class QuestionsServiceProvider extends ServiceProvider
     protected function registerTranslations(): void
     {
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'admin.module.faq.questions');
-    }
-
-    /**
-     * Регистрация наблюдателей.
-     *
-     * @return void
-     */
-    public function registerObservers(): void
-    {
-        $this->app->make('InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract')::observe($this->app->make('InetStudio\FAQ\Questions\Contracts\Observers\QuestionObserverContract'));
     }
 }

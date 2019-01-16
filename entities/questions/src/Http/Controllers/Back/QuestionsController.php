@@ -130,7 +130,7 @@ class QuestionsController extends Controller implements QuestionsControllerContr
      *
      * @return SaveResponseContract
      */
-    private function save(SaveQuestionRequestContract $request, int $id = 0): SaveResponseContract
+    protected function save(SaveQuestionRequestContract $request, int $id = 0): SaveResponseContract
     {
         $item = $this->services['questions']->save($request, $id);
 

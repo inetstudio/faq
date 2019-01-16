@@ -15,7 +15,7 @@ class QuestionsDataController extends Controller implements QuestionsDataControl
      *
      * @var array
      */
-    private $services;
+    protected $services;
 
     /**
      * QuestionsController constructor.

@@ -125,7 +125,7 @@ class TagsController extends Controller implements TagsControllerContract
      *
      * @return SaveResponseContract
      */
-    private function save(SaveTagRequestContract $request, int $id = 0): SaveResponseContract
+    protected function save(SaveTagRequestContract $request, int $id = 0): SaveResponseContract
     {
         $item = $this->services['tags']->save($request, $id);
 

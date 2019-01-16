@@ -74,6 +74,8 @@ class QuestionsService implements QuestionsServiceContract
     public function save(SaveQuestionRequestContract $request, int $id): QuestionModelContract
     {
         $action = ($id) ? 'отредактирован' : 'создан';
+
+        $oldActivity = $this->repository->getItemById($id)->is_active;
         $item = $this->repository->save($request->only($this->repository->getModel()->getFillable()), $id);
 
         $images = (config('faq_questions.images.conversions.question')) ? array_keys(config('faq_questions.images.conversions.question')) : [];
@@ -85,6 +87,12 @@ class QuestionsService implements QuestionsServiceContract
         event(app()->makeWith('InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyQuestionEventContract', [
             'object' => $item,
         ]));
+
+        if ($item->is_active == 1 && $oldActivity !== $item->is_active && $item->email) {
+            event(app()->makeWith('InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyActivityEventContract', [
+                'object' => $item,
+            ]));
+        }
 
         Session::flash('success', 'Вопрос успешно '.$action);
 

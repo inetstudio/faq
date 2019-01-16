@@ -15,7 +15,7 @@ class ActivityResponse implements ActivityResponseContract, Responsable
     /**
      * @var QuestionModelContract
      */
-    private $item;
+    protected $item;
 
     /**
      * ActivityResponse constructor.

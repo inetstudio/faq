@@ -14,7 +14,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * @var array
      */
-    private $result;
+    protected $result;
 
     /**
      * SaveResponse constructor.

@@ -18,6 +18,7 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
     * @var  array
     */
     public $bindings = [
+        'InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyActivityEventContract' => 'InetStudio\FAQ\Questions\Events\Back\ModifyActivityEvent',
         'InetStudio\FAQ\Questions\Contracts\Events\Back\ModifyQuestionEventContract' => 'InetStudio\FAQ\Questions\Events\Back\ModifyQuestionEvent',
         'InetStudio\FAQ\Questions\Contracts\Events\Front\SendQuestionEventContract' => 'InetStudio\FAQ\Questions\Events\Front\SendQuestionEvent',
         'InetStudio\FAQ\Questions\Contracts\Exports\QuestionsExportContract' => 'InetStudio\FAQ\Questions\Exports\QuestionsExport',
@@ -35,6 +36,8 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
         'InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Utility\ActivityResponseContract' => 'InetStudio\FAQ\Questions\Http\Responses\Back\Utility\ActivityResponse',
         'InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Utility\SuggestionsResponseContract' => 'InetStudio\FAQ\Questions\Http\Responses\Back\Utility\SuggestionsResponse',
         'InetStudio\FAQ\Questions\Contracts\Http\Responses\Front\SaveResponseContract' => 'InetStudio\FAQ\Questions\Http\Responses\Front\SaveResponse',
+        'InetStudio\FAQ\Questions\Contracts\Listeners\SendEmailToPersonListenerContract' => 'InetStudio\FAQ\Questions\Listeners\SendEmailToPersonListener',
+        'InetStudio\FAQ\Questions\Contracts\Listeners\SendEmailToUserListenerContract' => 'InetStudio\FAQ\Questions\Listeners\SendEmailToUserListener',
         'InetStudio\FAQ\Questions\Contracts\Mail\AnswerMailContract' => 'InetStudio\FAQ\Questions\Mail\AnswerMail',
         'InetStudio\FAQ\Questions\Contracts\Mail\NewQuestionMailContract' => 'InetStudio\FAQ\Questions\Mail\NewQuestionMail',
         'InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract' => 'InetStudio\FAQ\Questions\Models\QuestionModel',
@@ -42,10 +45,8 @@ class QuestionsBindingsServiceProvider extends ServiceProvider
         'InetStudio\FAQ\Questions\Contracts\Notifications\AnswerQueueableNotificationContract' => 'InetStudio\FAQ\Questions\Notifications\AnswerQueueableNotification',
         'InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionNotificationContract' => 'InetStudio\FAQ\Questions\Notifications\NewQuestionNotification',
         'InetStudio\FAQ\Questions\Contracts\Notifications\NewQuestionQueueableNotificationContract' => 'InetStudio\FAQ\Questions\Notifications\NewQuestionQueueableNotification',
-        'InetStudio\FAQ\Questions\Contracts\Observers\QuestionObserverContract' => 'InetStudio\FAQ\Questions\Observers\QuestionObserver',
         'InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract' => 'InetStudio\FAQ\Questions\Repositories\QuestionsRepository',
         'InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsDataTableServiceContract' => 'InetStudio\FAQ\Questions\Services\Back\QuestionsDataTableService',
-        'InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsObserverServiceContract' => 'InetStudio\FAQ\Questions\Services\Back\QuestionsObserverService',
         'InetStudio\FAQ\Questions\Contracts\Services\Back\QuestionsServiceContract' => 'InetStudio\FAQ\Questions\Services\Back\QuestionsService',
         'InetStudio\FAQ\Questions\Contracts\Services\Front\QuestionsServiceContract' => 'InetStudio\FAQ\Questions\Services\Front\QuestionsService',
         'InetStudio\FAQ\Questions\Contracts\Transformers\Back\QuestionTransformerContract' => 'InetStudio\FAQ\Questions\Transformers\Back\QuestionTransformer',

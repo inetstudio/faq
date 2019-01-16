@@ -17,7 +17,7 @@ class TagsService implements TagsServiceContract
     /**
      * @var TagsRepositoryContract
      */
-    private $repository;
+    protected $repository;
 
     /**
      * TagsService constructor.

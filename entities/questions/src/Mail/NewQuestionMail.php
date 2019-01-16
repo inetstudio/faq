@@ -39,8 +39,10 @@ class NewQuestionMail extends Mailable implements NewQuestionMailContract
         $subject = config('app.name').' | '.((config('faq_questions.mails_experts.subject')) ? config('faq_questions.mails_experts.subject') : 'Новый вопрос');
         $headers = (config('faq_questions.mails_experts.headers')) ? config('faq_questions.mails_experts.headers') : [];
 
+        $to = config('faq_questions.mails_experts.to') ?? $this->question->person->user->email;
+
         return $this->from(config('mail.from.address'), config('mail.from.name'))
-            ->to(config('faq_questions.mails_experts.to'), '')
+            ->to($to, '')
             ->subject($subject)
             ->withSwiftMessage(function ($message) use ($headers) {
                 $messageHeaders = $message->getHeaders();
