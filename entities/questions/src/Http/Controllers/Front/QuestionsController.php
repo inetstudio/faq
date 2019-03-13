@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Arcanedev\NoCaptcha\Rules\CaptchaRule;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Front\SaveResponseContract;
-use InetStudio\FAQ\Questions\Contracts\Http\Requests\Front\SaveQuestionRequestContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Controllers\Front\QuestionsControllerContract;
 
 /**
