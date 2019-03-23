@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Questions\Models;
 
+use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -90,10 +91,10 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
      */
     public function toSearchableArray()
     {
-        $arr = array_only($this->toArray(), ['id', 'question', 'answer']);
+        $arr = Arr::only($this->toArray(), ['id', 'question', 'answer']);
 
         $arr['tags'] = $this->tags->map(function ($item) {
-            return array_only($item->toSearchableArray(), ['id', 'title']);
+            return Arr::only($item->toSearchableArray(), ['id', 'title']);
         })->toArray();
 
         return $arr;

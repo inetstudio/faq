@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Tags\Models;
 
+use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -59,7 +60,7 @@ class TagModel extends Model implements TagModelContract
      */
     public function toSearchableArray()
     {
-        $arr = array_only($this->toArray(), ['id', 'name', 'title']);
+        $arr = Arr::only($this->toArray(), ['id', 'name', 'title']);
 
         return $arr;
     }
