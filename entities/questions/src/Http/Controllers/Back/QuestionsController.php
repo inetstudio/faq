@@ -68,7 +68,7 @@ class QuestionsController extends Controller implements QuestionsControllerContr
     }
 
     /**
-     * Добавление объекта.
+     * Создание объекта.
      *
      * @return FormResponseContract
      */

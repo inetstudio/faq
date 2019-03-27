@@ -63,7 +63,7 @@ class TagsController extends Controller implements TagsControllerContract
     }
 
     /**
-     * Добавление объекта.
+     * Создание объекта.
      *
      * @return FormResponseContract
      */
