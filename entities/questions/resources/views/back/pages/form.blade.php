@@ -60,7 +60,6 @@
                                                     'title' => 'Имя',
                                                 ],
                                                 'field' => [
-                                                    'class' => 'form-control',
                                                     'disabled' => (!! $item->name),
                                                 ],
                                             ]) !!}
@@ -70,7 +69,6 @@
                                                     'title' => 'Email',
                                                 ],
                                                 'field' => [
-                                                    'class' => 'form-control',
                                                     'disabled' => (!! $item->email),
                                                 ],
                                             ]) !!}
