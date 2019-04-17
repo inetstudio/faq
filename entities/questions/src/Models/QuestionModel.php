@@ -11,8 +11,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
-use InetStudio\Persons\Models\Traits\HasPersons;
 use InetStudio\Favorites\Models\Traits\Favoritable;
+use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\Favorites\Contracts\Models\Traits\FavoritableContract;
 
