@@ -21,6 +21,11 @@ class QuestionsService extends BaseService implements QuestionsServiceContract
     public $services;
 
     /**
+     * @var string
+     */
+    protected $favoritesType = 'faq_question';
+
+    /**
      * QuestionsService constructor.
      */
     public function __construct()
