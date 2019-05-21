@@ -15,6 +15,7 @@ use InetStudio\Favorites\Models\Traits\Favoritable;
 use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\Favorites\Contracts\Models\Traits\FavoritableContract;
+use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class QuestionModel.
@@ -29,6 +30,7 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
     use Searchable;
     use Favoritable;
     use SoftDeletes;
+    use BuildQueryScopeTrait;
 
     const ENTITY_TYPE = 'faq_question';
 
@@ -63,6 +65,28 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * Загрузка модели.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::$buildQueryScopeDefaults['columns'] = [
+            'id', 'is_active', 'name', 'email',
+        ];
+
+        self::$buildQueryScopeDefaults['relations'] = [
+            'persons' => function ($query) {
+                $query->select(['id', 'name', 'slug']);
+            },
+
+            'tags' => function ($query) {
+                $query->select(['id', 'name', 'title']);
+            },
+        ];
+    }
 
     public function setNameAttribute($value)
     {

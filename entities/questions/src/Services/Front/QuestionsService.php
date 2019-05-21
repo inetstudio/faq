@@ -15,6 +15,8 @@ class QuestionsService extends BaseService implements QuestionsServiceContract
     use TagsServiceTrait;
     use FavoritesServiceTrait;
 
+    public $model;
+
     /**
      * @var array
      */
@@ -31,6 +33,7 @@ class QuestionsService extends BaseService implements QuestionsServiceContract
     public function __construct()
     {
         parent::__construct(app()->make('InetStudio\FAQ\Questions\Contracts\Repositories\QuestionsRepositoryContract'));
+        $this->model = app()->make('InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract');
     }
 
     /**
