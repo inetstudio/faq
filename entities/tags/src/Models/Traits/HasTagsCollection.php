@@ -21,7 +21,7 @@ trait HasTagsCollection
     public function hasTag($tags): bool
     {
         if ($this->isTagsStringBased($tags)) {
-            return ! $this->tags->pluck('slug')->intersect((array) $tags)->isEmpty();
+            return ! $this->tags->pluck('name')->intersect((array) $tags)->isEmpty();
         }
 
         if ($this->isTagsIntBased($tags)) {
@@ -29,11 +29,11 @@ trait HasTagsCollection
         }
 
         if ($tags instanceof TagModelContract) {
-            return $this->tags->contains('slug', $tags['slug']);
+            return $this->tags->contains('name', $tags['name']);
         }
 
         if ($tags instanceof Collection) {
-            return ! $tags->intersect($this->tags->pluck('slug'))->isEmpty();
+            return ! $tags->intersect($this->tags->pluck('name'))->isEmpty();
         }
 
         return false;
@@ -63,7 +63,7 @@ trait HasTagsCollection
         if ($this->isTagsStringBased($tags)) {
             $tags = (array) $tags;
 
-            return $this->tags->pluck('slug')->intersect($tags)->count() == count($tags);
+            return $this->tags->pluck('name')->intersect($tags)->count() == count($tags);
         }
 
         if ($this->isTagsIntBased($tags)) {
@@ -73,7 +73,7 @@ trait HasTagsCollection
         }
 
         if ($tags instanceof TagModelContract) {
-            return $this->tags->contains('slug', $tags['slug']);
+            return $this->tags->contains('name', $tags['name']);
         }
 
         if ($tags instanceof Collection) {

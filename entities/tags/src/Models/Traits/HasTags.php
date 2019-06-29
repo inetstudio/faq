@@ -49,7 +49,7 @@ trait HasTags
     {
         $className = $this->getTagClassName();
 
-        return $this->morphToMany($className, 'taggable')->withTimestamps();
+        return $this->morphToMany($className, 'taggable', 'faq_taggables')->withTimestamps();
     }
 
     /**
@@ -100,7 +100,7 @@ trait HasTags
      *
      * @throws BindingResolutionException
      */
-    public function tagList(string $keyColumn = 'slug'): array
+    public function tagList(string $keyColumn = 'name'): array
     {
         return $this->tags()->pluck('name', $keyColumn)->toArray();
     }
@@ -116,10 +116,10 @@ trait HasTags
      *
      * @throws BindingResolutionException
      */
-    public function scopeWithAllTags(Builder $query, $tags, string $column = 'slug'): Builder
+    public function scopeWithAllTags(Builder $query, $tags, string $column = 'name'): Builder
     {
         $tags = $this->isTagsStringBased($tags)
-            ? $tags : $this->hydrateTags($tags)->pluck($column);
+            ? $tags : $this->hydrateTags($tags)->pluck($column)->toArray();
 
         collect($tags)->each(
             function ($tag) use ($query, $column) {
@@ -146,10 +146,10 @@ trait HasTags
      *
      * @throws BindingResolutionException
      */
-    public function scopeWithAnyTags(Builder $query, $tags, string $column = 'slug'): Builder
+    public function scopeWithAnyTags(Builder $query, $tags, string $column = 'name'): Builder
     {
         $tags = $this->isTagsStringBased($tags)
-            ? $tags : $this->hydrateTags($tags)->pluck($column);
+            ? $tags : $this->hydrateTags($tags)->pluck($column)->toArray();
 
         return $query->whereHas(
             'tags',
@@ -170,7 +170,7 @@ trait HasTags
      *
      * @throws BindingResolutionException
      */
-    public function scopeWithTags(Builder $query, $tags, string $column = 'slug'): Builder
+    public function scopeWithTags(Builder $query, $tags, string $column = 'name'): Builder
     {
         return $this->scopeWithAnyTags($query, $tags, $column);
     }
@@ -186,10 +186,10 @@ trait HasTags
      *
      * @throws BindingResolutionException
      */
-    public function scopeWithoutTags(Builder $query, $tags, string $column = 'slug'): Builder
+    public function scopeWithoutTags(Builder $query, $tags, string $column = 'name'): Builder
     {
         $tags = $this->isTagsStringBased($tags)
-            ? $tags : $this->hydrateTags($tags)->pluck($column);
+            ? $tags : $this->hydrateTags($tags)->pluck($column)->toArray();
 
         return $query->whereDoesntHave(
             'tags',
@@ -298,7 +298,7 @@ trait HasTags
     {
         $isTagsStringBased = $this->isTagsStringBased($tags);
         $isTagsIntBased = $this->isTagsIntBased($tags);
-        $field = $isTagsStringBased ? 'slug' : 'id';
+        $field = $isTagsStringBased ? 'name' : 'id';
         $className = $this->getTagClassName();
 
         return $isTagsStringBased || $isTagsIntBased

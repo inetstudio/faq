@@ -40,6 +40,6 @@ class ItemsService extends BaseService implements ItemsServiceContract
             ->pluck('tag_model_id')
             ->toArray();;
 
-        return $this->model->getItemById($itemsIds, $params);
+        return $this->getItemById($itemsIds, $params);
     }
 }
