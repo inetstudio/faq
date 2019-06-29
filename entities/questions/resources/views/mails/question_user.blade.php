@@ -1,1 +1,1 @@
-<a href="{{ route('front.experts.get') }}/?question={{ $question->id }}">Перейти к вопросу</a>
+<a href="{{ route('front.experts.get') }}/?question={{ $item->id }}">Перейти к вопросу</a>

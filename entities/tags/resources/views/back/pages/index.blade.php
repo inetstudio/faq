@@ -31,5 +31,5 @@
 @endsection
 
 @pushonce('scripts:datatables_faq_tags_index')
-    {!! $table->scripts() !!}
+{!! $table->scripts() !!}
 @endpushonce

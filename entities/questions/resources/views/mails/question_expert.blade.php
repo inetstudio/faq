@@ -1,1 +1,1 @@
-<a href="{{ route('back.faq.questions.edit', [$question->id]) }}">Перейти к вопросу</a>
+<a href="{{ route('back.faq.questions.edit', [$item->id]) }}">Перейти к вопросу</a>

@@ -19,7 +19,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * SaveResponse constructor.
      *
-     * @param array $result
+     * @param  array  $result
      */
     public function __construct(array $result)
     {
@@ -29,7 +29,7 @@ class SaveResponse implements SaveResponseContract, Responsable
     /**
      * Возвращаем ответ при удалении объекта.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      *
      * @return JsonResponse
      */

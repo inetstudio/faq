@@ -25,8 +25,6 @@ class CreateFoldersCommand extends Command
 
     /**
      * Запуск команды.
-     *
-     * @return void
      */
     public function handle(): void
     {
@@ -45,15 +43,17 @@ class CreateFoldersCommand extends Command
     /**
      * Создание директории.
      *
-     * @param $path
+     * @param  string  $path
      */
-    protected function createDir($path): void
+    protected function createDir(string $path): void
     {
-        if (! is_dir($path)) {
-            mkdir($path, 0777, true);
-            $this->info($path.' Has been created.');
-        } else {
+        if (is_dir($path)) {
             $this->info($path.' Already created.');
+
+            return;
         }
+
+        mkdir($path, 0777, true);
+        $this->info($path.' Has been created.');
     }
 }

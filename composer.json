@@ -1,34 +1,36 @@
 {
-    "name": "inetstudio/faq",
-    "description": "Package for faq",
-    "homepage": "https://github.com/inetstudio/faq",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Konstantin Bukin",
-            "email": "bukin@inetstudio.ru"
-        }
-    ],
-    "require": {
-        "arcanedev/no-captcha": "^9.0"
-    },
-    "autoload": {
-      "psr-4": {
-        "InetStudio\\FAQ\\": "package/src",
-        "InetStudio\\FAQ\\Questions\\": "entities/questions/src",
-        "InetStudio\\FAQ\\Tags\\": "entities/tags/src"
-      }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "InetStudio\\FAQ\\Providers\\FAQServiceProvider",
-                "InetStudio\\FAQ\\Questions\\Providers\\QuestionsBindingsServiceProvider",
-                "InetStudio\\FAQ\\Questions\\Providers\\QuestionsServiceProvider",
-                "InetStudio\\FAQ\\Tags\\Providers\\FormBuilderServiceProvider",
-                "InetStudio\\FAQ\\Tags\\Providers\\TagsBindingsServiceProvider",
-                "InetStudio\\FAQ\\Tags\\Providers\\TagsServiceProvider"
-            ]
-        }
+  "name": "inetstudio/faq",
+  "description": "Package for faq",
+  "homepage": "https://github.com/inetstudio/faq",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Konstantin Bukin",
+      "email": "bukin@inetstudio.ru"
     }
+  ],
+  "require": {
+    "arcanedev/no-captcha": "^9.0",
+    "inetstudio/admin-panel": "1.8.*",
+    "inetstudio/favorites": "1.8.*",
+    "inetstudio/persons": "1.8.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "InetStudio\\FAQ\\": "package/src",
+      "InetStudio\\FAQ\\Questions\\": "entities/questions/src",
+      "InetStudio\\FAQ\\Tags\\": "entities/tags/src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "InetStudio\\FAQ\\Providers\\ServiceProvider",
+        "InetStudio\\FAQ\\Questions\\Providers\\BindingsServiceProvider",
+        "InetStudio\\FAQ\\Questions\\Providers\\ServiceProvider",
+        "InetStudio\\FAQ\\Tags\\Providers\\BindingsServiceProvider",
+        "InetStudio\\FAQ\\Tags\\Providers\\ServiceProvider"
+      ]
+    }
+  }
 }

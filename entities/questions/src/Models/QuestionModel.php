@@ -4,9 +4,9 @@ namespace InetStudio\FAQ\Questions\Models;
 
 use Illuminate\Support\Arr;
 use Laravel\Scout\Searchable;
+use OwenIt\Auditing\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
@@ -14,16 +14,16 @@ use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Favorites\Models\Traits\Favoritable;
 use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
-use InetStudio\Favorites\Contracts\Models\Traits\FavoritableContract;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
 /**
  * Class QuestionModel.
  */
-class QuestionModel extends Model implements QuestionModelContract, HasMedia, FavoritableContract
+class QuestionModel extends Model implements QuestionModelContract
 {
     use HasTags;
     use HasUser;
+    use Auditable;
     use HasImages;
     use HasPersons;
     use Notifiable;
@@ -32,8 +32,23 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
     use SoftDeletes;
     use BuildQueryScopeTrait;
 
+    /**
+     * Тип сущности.
+     */
     const ENTITY_TYPE = 'faq_question';
 
+    /**
+     * Should the timestamps be audited?
+     *
+     * @var bool
+     */
+    protected $auditTimestamps = true;
+
+    /**
+     * Настройки для генерации изображений.
+     *
+     * @var array
+     */
     protected $images = [
         'config' => 'faq_questions',
         'model' => 'question',
@@ -52,7 +67,13 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
      * @var array
      */
     protected $fillable = [
-        'is_read', 'is_active', 'user_id', 'name', 'email', 'question', 'answer',
+        'is_read',
+        'is_active',
+        'user_id',
+        'name',
+        'email',
+        'question',
+        'answer',
     ];
 
     /**
@@ -65,48 +86,6 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
         'updated_at',
         'deleted_at',
     ];
-
-    /**
-     * Загрузка модели.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        self::$buildQueryScopeDefaults['columns'] = [
-            'id', 'is_active', 'name', 'email',
-        ];
-
-        self::$buildQueryScopeDefaults['relations'] = [
-            'persons' => function ($query) {
-                $query->select(['id', 'name', 'slug']);
-            },
-
-            'tags' => function ($query) {
-                $query->select(['id', 'name', 'title']);
-            },
-        ];
-    }
-
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = strip_tags($value);
-    }
-
-    public function setEmailAttribute($value)
-    {
-        $this->attributes['email'] = strip_tags($value);
-    }
-
-    public function setQuestionAttribute($value)
-    {
-        $this->attributes['question'] = trim(str_replace("&nbsp;", ' ', strip_tags((isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : ''))));
-    }
-
-    public function setAnswerAttribute($value)
-    {
-        $this->attributes['answer'] = trim(str_replace("&nbsp;", ' ', (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '')));
-    }
 
     /**
      * Настройка полей для поиска.
@@ -122,6 +101,115 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
         })->toArray();
 
         return $arr;
+    }
+
+    /**
+     * Загрузка модели.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::$buildQueryScopeDefaults['columns'] = [
+            'id',
+            'is_active',
+            'name',
+            'email',
+        ];
+
+        self::$buildQueryScopeDefaults['relations'] = [
+            'persons' => function ($query) {
+                $query->select(['id', 'name', 'slug']);
+            },
+
+            'tags' => function ($query) {
+                $query->select(['id', 'name', 'title']);
+            },
+        ];
+    }
+
+    /**
+     * Сеттер атрибута is_read.
+     *
+     * @param $value
+     */
+    public function setIsReadAttribute($value)
+    {
+        $this->attributes['is_read'] = (bool) trim(strip_tags($value));
+    }
+
+    /**
+     * Сеттер атрибута is_active.
+     *
+     * @param $value
+     */
+    public function setIsActiveAttribute($value)
+    {
+        $this->attributes['is_active'] = (bool) trim(strip_tags($value));
+    }
+
+    /**
+     * Сеттер атрибута user_id.
+     *
+     * @param $value
+     */
+    public function setUserIdAttribute($value)
+    {
+        $this->attributes['user_id'] = (int) trim(strip_tags($value));
+    }
+
+    /**
+     * Сеттер атрибута name.
+     *
+     * @param $value
+     */
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['name'] = strip_tags($value);
+    }
+
+    /**
+     * Сеттер атрибута email.
+     *
+     * @param $value
+     */
+    public function setEmailAttribute($value): void
+    {
+        $this->attributes['email'] = strip_tags($value);
+    }
+
+    /**
+     * Сеттер атрибута question.
+     *
+     * @param $value
+     */
+    public function setQuestionAttribute($value): void
+    {
+        $value = (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '');
+
+        $this->attributes['question'] = trim(str_replace('&nbsp;', ' ', strip_tags($value)));
+    }
+
+    /**
+     * Сеттер атрибута answer.
+     *
+     * @param $value
+     */
+    public function setAnswerAttribute($value): void
+    {
+        $value = (isset($value['text'])) ? $value['text'] : (! is_array($value) ? $value : '');
+
+        $this->attributes['answer'] = trim(str_replace('&nbsp;', ' ', $value));
+    }
+
+    /**
+     * Геттер атрибута type.
+     *
+     * @return string
+     */
+    public function getTypeAttribute(): string
+    {
+        return self::ENTITY_TYPE;
     }
 
     /**
@@ -158,15 +246,5 @@ class QuestionModel extends Model implements QuestionModelContract, HasMedia, Fa
     public function scopeInactive($query)
     {
         return $query->where('is_active', 0);
-    }
-
-    /**
-     * Тип материала.
-     *
-     * @return string
-     */
-    public function getTypeAttribute()
-    {
-        return self::ENTITY_TYPE;
     }
 }

@@ -30,125 +30,126 @@
 
         {!! Form::open(['url' => (! $item->id) ? route('back.faq.questions.store') : route('back.faq.questions.update', [$item->id]), 'id' => 'mainForm', 'enctype' => 'multipart/form-data']) !!}
 
-            @if ($item->id)
-                {{ method_field('PUT') }}
-            @endif
+        @if ($item->id)
+            {{ method_field('PUT') }}
+        @endif
 
-            {!! Form::hidden('question_id', (! $item->id) ? '' : $item->id, ['id' => 'object-id']) !!}
+        {!! Form::hidden('question_id', (! $item->id) ? '' : $item->id, ['id' => 'object-id']) !!}
 
-            {!! Form::hidden('question_type', get_class($item), ['id' => 'object-type']) !!}
+        {!! Form::hidden('question_type', get_class($item), ['id' => 'object-type']) !!}
 
-            <div class="ibox">
-                <div class="ibox-title">
-                    {!! Form::buttons('', '', ['back' => 'back.faq.questions.index']) !!}
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel-group float-e-margins" id="mainAccordion">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h5 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#mainAccordion" href="#collapseMain" aria-expanded="true">Основная информация</a>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseMain" class="collapse show" aria-expanded="true">
-                                        <div class="panel-body">
+        <div class="ibox">
+            <div class="ibox-title">
+                {!! Form::buttons('', '', ['back' => 'back.faq.questions.index']) !!}
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel-group float-e-margins" id="mainAccordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#mainAccordion" href="#collapseMain"
+                                           aria-expanded="true">Основная информация</a>
+                                    </h5>
+                                </div>
+                                <div id="collapseMain" class="collapse show" aria-expanded="true">
+                                    <div class="panel-body">
 
-                                            {!! Form::string('name', $item->name, [
-                                                'label' => [
-                                                    'title' => 'Имя',
-                                                ],
-                                                'field' => [
-                                                    'disabled' => (!! $item->name),
-                                                ],
-                                            ]) !!}
+                                        {!! Form::string('name', $item->name, [
+                                            'label' => [
+                                                'title' => 'Имя',
+                                            ],
+                                            'field' => [
+                                                'disabled' => (!! $item->name),
+                                            ],
+                                        ]) !!}
 
-                                            {!! Form::string('email', $item->email, [
-                                                'label' => [
-                                                    'title' => 'Email',
-                                                ],
-                                                'field' => [
-                                                    'disabled' => (!! $item->email),
-                                                ],
-                                            ]) !!}
+                                        {!! Form::string('email', $item->email, [
+                                            'label' => [
+                                                'title' => 'Email',
+                                            ],
+                                            'field' => [
+                                                'disabled' => (!! $item->email),
+                                            ],
+                                        ]) !!}
 
-                                            {!! Form::wysiwyg('question', $item->question, [
-                                                'label' => [
-                                                    'title' => 'Вопрос',
-                                                ],
-                                                'field' => [
-                                                    'class' => 'tinymce-simple',
-                                                    'type' => 'simple',
-                                                    'id' => 'question',
-                                                ],
-                                            ]) !!}
+                                        {!! Form::wysiwyg('question', $item->question, [
+                                            'label' => [
+                                                'title' => 'Вопрос',
+                                            ],
+                                            'field' => [
+                                                'class' => 'tinymce-simple',
+                                                'type' => 'simple',
+                                                'id' => 'question',
+                                            ],
+                                        ]) !!}
 
-                                            {!! Form::wysiwyg('answer', $item->answer, [
-                                                'label' => [
-                                                    'title' => 'Ответ',
-                                                ],
-                                                'field' => [
-                                                    'class' => 'tinymce',
-                                                    'id' => 'answer',
-                                                    'hasImages' => true,
-                                                ],
-                                                'images' => [
-                                                    'media' => $item->getMedia('answer'),
-                                                    'fields' => [
-                                                        [
-                                                            'title' => 'Описание',
-                                                            'name' => 'description',
-                                                        ],
-                                                        [
-                                                            'title' => 'Copyright',
-                                                            'name' => 'copyright',
-                                                        ],
-                                                        [
-                                                            'title' => 'Alt',
-                                                            'name' => 'alt',
-                                                        ],
-                                                    ],
-                                                ],
-                                            ]) !!}
-
-                                            {!! Form::faq_tags('', $item) !!}
-
-                                            {!! Form::radios('is_active', (! $item->id) ? 1 : $item->is_active, [
-                                                'label' => [
-                                                    'title' => 'Отображать на сайте',
-                                                ],
-                                                'radios' => [
+                                        {!! Form::wysiwyg('answer', $item->answer, [
+                                            'label' => [
+                                                'title' => 'Ответ',
+                                            ],
+                                            'field' => [
+                                                'class' => 'tinymce',
+                                                'id' => 'answer',
+                                                'hasImages' => true,
+                                            ],
+                                            'images' => [
+                                                'media' => $item->getMedia('answer'),
+                                                'fields' => [
                                                     [
-                                                        'label' => 'Да',
-                                                        'value' => 1,
-                                                        'options' => [
-                                                            'class' => 'i-checks',
-                                                        ],
+                                                        'title' => 'Описание',
+                                                        'name' => 'description',
                                                     ],
                                                     [
-                                                        'label' => 'Нет',
-                                                        'value' => 0,
-                                                        'options' => [
-                                                            'class' => 'i-checks',
-                                                        ],
-                                                    ]
+                                                        'title' => 'Copyright',
+                                                        'name' => 'copyright',
+                                                    ],
+                                                    [
+                                                        'title' => 'Alt',
+                                                        'name' => 'alt',
+                                                    ],
                                                 ],
-                                            ]) !!}
+                                            ],
+                                        ]) !!}
 
-                                            {!! Form::hidden('is_read', 1) !!}
+                                        {!! Form::faq_tags('', $item) !!}
 
-                                        </div>
+                                        {!! Form::radios('is_active', (! $item->id) ? 1 : $item->is_active, [
+                                            'label' => [
+                                                'title' => 'Отображать на сайте',
+                                            ],
+                                            'radios' => [
+                                                [
+                                                    'label' => 'Да',
+                                                    'value' => 1,
+                                                    'options' => [
+                                                        'class' => 'i-checks',
+                                                    ],
+                                                ],
+                                                [
+                                                    'label' => 'Нет',
+                                                    'value' => 0,
+                                                    'options' => [
+                                                        'class' => 'i-checks',
+                                                    ],
+                                                ]
+                                            ],
+                                        ]) !!}
+
+                                        {!! Form::hidden('is_read', 1) !!}
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="ibox-footer">
-                    {!! Form::buttons('', '', ['back' => 'back.faq.questions.index']) !!}
-                </div>
             </div>
+            <div class="ibox-footer">
+                {!! Form::buttons('', '', ['back' => 'back.faq.questions.index']) !!}
+            </div>
+        </div>
 
         {!! Form::close()!!}
 

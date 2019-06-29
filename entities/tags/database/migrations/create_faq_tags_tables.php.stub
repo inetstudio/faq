@@ -3,8 +3,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateFAQTagsTables.
+ */
 class CreateFAQTagsTables extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up()
     {
         Schema::create('faq_tags', function (Blueprint $table) {
@@ -28,8 +34,6 @@ class CreateFAQTagsTables extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

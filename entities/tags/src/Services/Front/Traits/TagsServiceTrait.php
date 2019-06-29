@@ -10,26 +10,30 @@ trait TagsServiceTrait
     /**
      * Получаем объекты по тегу.
      *
-     * @param string $tagSlug
-     * @param array $params
+     * @param  string  $slug
+     * @param  array  $params
      *
      * @return mixed
      */
-    public function getItemsByTag(string $tagSlug, array $params = [])
+    public function getItemsByTag(string $slug, array $params = [])
     {
-        return $this->repository->getItemsByTag($tagSlug, $params);
+        return $this->model
+            ->buildQuery($params)
+            ->withTags($slug);
     }
 
     /**
      * Получаем объекты с любыми тегами.
      *
      * @param $tags
-     * @param array $params
+     * @param  array  $params
      *
      * @return mixed
      */
     public function getItemsByAnyTag($tags, array $params = [])
     {
-        return $this->repository->getItemsByAnyTag($tags, $params);
+        return $this->model
+            ->buildQuery($params)
+            ->withAnyTags($tags);
     }
 }

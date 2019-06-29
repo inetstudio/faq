@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Questions\Listeners;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\FAQ\Questions\Contracts\Listeners\SendEmailToUserListenerContract;
 
 /**
@@ -12,25 +13,29 @@ class SendEmailToUserListener implements SendEmailToUserListenerContract
     /**
      * Handle the event.
      *
-     * @param object $event
+     * @param $event
      *
-     * @return void
+     * @throws BindingResolutionException
      */
     public function handle($event)
     {
-        $question = $event->object;
+        $item = $event->item;
 
         if (config('faq_questions.mails_users.send')) {
             if (config('faq_questions.queue.enable')) {
                 $queue = config('faq_questions.queue.name') ?? 'faq_questions_notify';
 
-                $question->notify(
-                    app()->makeWith('InetStudio\FAQ\Questions\Contracts\Notifications\AnswerQueueableNotificationContract', compact('question'))
-                        ->onQueue($queue)
+                $item->notify(
+                    app()->make(
+                        'InetStudio\FAQ\Questions\Contracts\Notifications\Back\AnswerQueueableNotificationContract',
+                        compact('item')
+                    )->onQueue($queue)
                 );
             } else {
-                $question->notify(
-                    app()->makeWith('InetStudio\FAQ\Questions\Contracts\Notifications\AnswerNotificationContract', compact('question'))
+                $item->notify(
+                    app()->make('InetStudio\FAQ\Questions\Contracts\Notifications\Back\AnswerNotificationContract',
+                        compact('item')
+                    )
                 );
             }
         }

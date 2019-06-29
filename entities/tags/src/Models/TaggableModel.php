@@ -3,6 +3,8 @@
 namespace InetStudio\FAQ\Tags\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\FAQ\Tags\Contracts\Models\TaggableModelContract;
 
 /**
@@ -23,7 +25,9 @@ class TaggableModel extends Model implements TaggableModelContract
      * @var array
      */
     protected $fillable = [
-        'tag_model_id', 'taggable_id', 'taggable_type',
+        'tag_model_id',
+        'taggable_id',
+        'taggable_type',
     ];
 
     /**
@@ -39,10 +43,17 @@ class TaggableModel extends Model implements TaggableModelContract
     /**
      * Обратное отношение "один ко многим" с моделью тега.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
+     *
+     * @throws BindingResolutionException
      */
     public function tag()
     {
-        return $this->belongsTo(app()->make('InetStudio\FAQ\Tags\Contracts\Models\TagModelContract'), 'tag_model_id');
+        $tagModel = app()->make('InetStudio\FAQ\Tags\Contracts\Models\TagModelContract');
+
+        return $this->belongsTo(
+            get_class($tagModel),
+            'tag_model_id'
+        );
     }
 }

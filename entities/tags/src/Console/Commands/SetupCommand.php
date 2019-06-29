@@ -2,7 +2,7 @@
 
 namespace InetStudio\FAQ\Tags\Console\Commands;
 
-use InetStudio\AdminPanel\Console\Commands\BaseSetupCommand;
+use InetStudio\AdminPanel\Base\Console\Commands\BaseSetupCommand;
 
 /**
  * Class SetupCommand.
@@ -21,12 +21,10 @@ class SetupCommand extends BaseSetupCommand
      *
      * @var string
      */
-    protected $description = 'Setup tags package';
+    protected $description = 'Setup faq tags package';
 
     /**
      * Инициализация команд.
-     *
-     * @return void
      */
     protected function initCommands(): void
     {
@@ -36,7 +34,7 @@ class SetupCommand extends BaseSetupCommand
                 'description' => 'Publish migrations',
                 'command' => 'vendor:publish',
                 'params' => [
-                    '--provider' => 'InetStudio\FAQ\Tags\Providers\TagsServiceProvider',
+                    '--provider' => 'InetStudio\FAQ\Tags\Providers\ServiceProvider',
                     '--tag' => 'migrations',
                 ],
             ],
