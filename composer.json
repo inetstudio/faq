@@ -12,8 +12,7 @@
   "require": {
     "arcanedev/no-captcha": "^9.0",
     "inetstudio/admin-panel": "1.8.*",
-    "inetstudio/favorites": "1.8.*",
-    "inetstudio/persons": "1.8.*"
+    "inetstudio/favorites": "1.8.*"
   },
   "autoload": {
     "psr-4": {

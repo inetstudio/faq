@@ -34,7 +34,6 @@ class ItemsExport implements ItemsExportContract, FromQuery, WithMapping, WithHe
         return $questionsService->getModel()->buildQuery(
             [
                 'columns' => ['question', 'answer', 'created_at'],
-                'relations' => ['persons'],
             ]
         );
     }
@@ -53,7 +52,6 @@ class ItemsExport implements ItemsExportContract, FromQuery, WithMapping, WithHe
             $question->email,
             strip_tags($question->question),
             strip_tags($question->answer),
-            ($question->persons->count() > 0) ? $question->persons->first()->name : '',
         ];
     }
 
@@ -69,7 +67,6 @@ class ItemsExport implements ItemsExportContract, FromQuery, WithMapping, WithHe
             'Email',
             'Вопрос',
             'Ответ',
-            'Эксперт',
         ];
     }
 
