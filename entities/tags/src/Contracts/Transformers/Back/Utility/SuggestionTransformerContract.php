@@ -2,8 +2,8 @@
 
 namespace InetStudio\FAQ\Tags\Contracts\Transformers\Back\Utility;
 
-use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\FAQ\Tags\Contracts\Models\TagModelContract;
+use League\Fractal\Resource\Collection as FractalCollection;
 
 /**
  * Interface SuggestionTransformerContract.

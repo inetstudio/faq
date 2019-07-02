@@ -5,9 +5,9 @@ namespace InetStudio\FAQ\Questions\Contracts\Http\Controllers\Back;
 use InetStudio\FAQ\Questions\Contracts\Services\Back\ItemsServiceContract;
 use InetStudio\FAQ\Questions\Contracts\Services\Back\DataTableServiceContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Requests\Back\SaveItemRequestContract;
-use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\FormResponseContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\SaveResponseContract;
+use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\ShowResponseContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\IndexResponseContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\DestroyResponseContract;
 

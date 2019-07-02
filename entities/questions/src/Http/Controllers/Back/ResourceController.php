@@ -14,7 +14,6 @@ use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\ShowResponse
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\IndexResponseContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Back\Resource\DestroyResponseContract;
 
-
 /**
  * Class QuestionsController.
  */

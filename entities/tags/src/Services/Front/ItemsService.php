@@ -38,7 +38,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $itemsIds = $taggableModel::select(['tag_model_id'])
             ->groupBy('tag_model_id')
             ->pluck('tag_model_id')
-            ->toArray();;
+            ->toArray();
 
         return $this->getItemById($itemsIds, $params);
     }
