@@ -2,10 +2,9 @@
 
 namespace InetStudio\FAQ\Tags\Transformers\Back\Utility;
 
-use Throwable;
 use League\Fractal\TransformerAbstract;
-use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\FAQ\Tags\Contracts\Models\TagModelContract;
+use League\Fractal\Resource\Collection as FractalCollection;
 use InetStudio\FAQ\Tags\Contracts\Transformers\Back\Utility\SuggestionTransformerContract;
 
 /**

@@ -25,7 +25,6 @@ interface ResourceControllerContract
      */
     public function index(DataTableServiceContract $dataTableService): IndexResponseContract;
 
-
     /**
      * Получение объекта.
      *

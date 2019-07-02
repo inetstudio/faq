@@ -47,6 +47,6 @@ return [
 
     'queue' => [
         'enable' => false,
-        'name' => 'faq_questions_notify'
+        'name' => 'faq_questions_notify',
     ],
 ];

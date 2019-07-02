@@ -7,8 +7,8 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Html\Builder;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\FAQ\Tags\Contracts\Models\TagModelContract;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\FAQ\Tags\Contracts\Services\Back\DataTableServiceContract;
 
 /**

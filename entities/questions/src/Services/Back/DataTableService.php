@@ -95,7 +95,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
     {
         return [
             ['data' => 'checkbox', 'name' => 'checkbox', 'title' => view('admin.module.faq.questions::back.partials.datatables.checkbox')
-                ->render(), 'orderable' => false, 'searchable' => false],
+                ->render(), 'orderable' => false, 'searchable' => false, ],
             ['data' => 'read', 'name' => 'is_read', 'title' => 'Непрочитано', 'searchable' => false],
             ['data' => 'active', 'name' => 'is_active', 'title' => 'Активность', 'searchable' => false],
             ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
