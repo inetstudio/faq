@@ -52,6 +52,10 @@ class ItemsService extends BaseService implements ItemsServiceContract
         app()->make('InetStudio\FAQ\Tags\Contracts\Services\Back\ItemsServiceContract')
             ->attachToObject($tagsData, $item);
 
+        $personsData = Arr::get($data, 'persons', []);
+        app()->make('InetStudio\PersonsPackage\Persons\Contracts\Services\Back\ItemsServiceContract')
+            ->attachToObject($personsData, $item);
+
         $item->searchable();
 
         event(

@@ -113,6 +113,11 @@
                                             ],
                                         ]) !!}
 
+                                        {!! Form::persons('', $item, [
+                                            'label' => 'Эксперты',
+                                            'placeholder' => 'Выберите экспертов',
+                                        ]) !!}
+
                                         {!! Form::faq_tags('', $item) !!}
 
                                         {!! Form::radios('is_active', (! $item->id) ? 1 : $item->is_active, [

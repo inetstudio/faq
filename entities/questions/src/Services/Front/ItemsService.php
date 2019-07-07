@@ -2,6 +2,7 @@
 
 namespace InetStudio\FAQ\Questions\Services\Front;
 
+use Illuminate\Support\Arr;
 use InetStudio\AdminPanel\Base\Services\BaseService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\FAQ\Tags\Services\Front\Traits\TagsServiceTrait;
@@ -59,6 +60,10 @@ class ItemsService extends BaseService implements ItemsServiceContract
         $result = ($item && $item['id']);
 
         if ($result) {
+            $personsData = Arr::get($data, 'persons', []);
+            app()->make('InetStudio\PersonsPackage\Persons\Contracts\Services\Back\ItemsServiceContract')
+                ->attachToObject($personsData, $item);
+
             event(
                 app()->makeWith(
                     'InetStudio\FAQ\Questions\Contracts\Events\Front\SendItemEventContract',

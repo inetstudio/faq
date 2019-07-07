@@ -12,6 +12,7 @@ use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Favorites\Models\Traits\Favoritable;
+use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
@@ -24,6 +25,7 @@ class QuestionModel extends Model implements QuestionModelContract
     use HasUser;
     use Auditable;
     use HasImages;
+    use HasPersons;
     use Notifiable;
     use Searchable;
     use Favoritable;
@@ -119,6 +121,13 @@ class QuestionModel extends Model implements QuestionModelContract
             'tags' => function ($query) {
                 $query->select(['id', 'name', 'title']);
             },
+
+            'persons' => function ($query) {
+                $query->select(['id', 'name', 'slug'])
+                    ->with(['media' => function ($query) {
+                        $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'mime_type', 'custom_properties']);
+                    }]);
+            }
         ];
     }
 
