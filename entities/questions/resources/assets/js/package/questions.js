@@ -1,6 +1,16 @@
 let questions = {};
 
 questions.init = function () {
+  if (!window.Admin.vue.modulesComponents.modules.hasOwnProperty('faq')) {
+    window.Admin.vue.modulesComponents.modules = Object.assign(
+        {}, window.Admin.vue.modulesComponents.modules, {
+          faq: {
+            components: [],
+          },
+        });
+  }
+
+
   let $table = $('#questions_table .dataTable');
   let $tableContent = $('#questions_table .ibox-content');
 
