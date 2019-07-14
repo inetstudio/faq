@@ -1,38 +1,27 @@
 # Elasticsearch
 
 ````
-PUT app_index
-PUT app_index/_mapping/faq_questions
+curl -X PUT "localhost:9200/app_index_faq" -H 'Content-Type: application/json' -d'
 {
-    "properties": {
-        "id": {
-            "type": "integer"
-        },
-        "question": {
-            "type": "text"
-        },  
-        "answer": {
-            "type": "text"
-        },	
-        "tags": {
-            "type": "nested"
-        }
-    }
+   "mappings":{
+      "properties":{
+          "type": {
+             "type":"keyword"
+          },
+          "id":{
+             "type":"integer"
+          },
+          "is_published": {
+             "type":"boolean"
+          },
+          "question":{
+             "type":"text"
+          },
+          "answer":{
+             "type":"text"
+          }
+       }
+   }
 }
-
-PUT app_index
-PUT app_index/_mapping/faq_tags
-{
-    "properties": {
-        "id": {
-            "type": "integer"
-        },
-        "name": {
-            "type": "string"
-        },  
-        "title": {
-            "type": "string"
-        }
-    }
-}
+'
 ````

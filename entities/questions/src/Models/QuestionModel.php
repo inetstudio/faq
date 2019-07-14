@@ -104,6 +104,16 @@ class QuestionModel extends Model implements QuestionModelContract
     }
 
     /**
+     * Get the _type name for the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return '_doc';
+    }
+
+    /**
      * Загрузка модели.
      */
     protected static function boot()
