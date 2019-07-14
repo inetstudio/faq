@@ -104,6 +104,16 @@ class QuestionModel extends Model implements QuestionModelContract
     }
 
     /**
+     * Get the index name for the model.
+     *
+     * @return string
+     */
+    public function searchableIndex()
+    {
+        return trim(config('scout.elasticsearch.index', '').'_faq', '_');
+    }
+
+    /**
      * Get the _type name for the model.
      *
      * @return string
