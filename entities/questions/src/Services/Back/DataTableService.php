@@ -102,7 +102,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
             ['data' => 'persons', 'name' => 'persons.name', 'title' => 'Эксперт'],
             ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
-            ['data' => 'question', 'name' => 'quiestion', 'title' => 'Вопрос'],
+            ['data' => 'question', 'name' => 'question', 'title' => 'Вопрос'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
             ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Дата обновления'],
             [
@@ -138,7 +138,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
         $translation = trans('admin::datatables');
 
         return [
-            'order' => [6, 'desc'],
+            'order' => [7, 'desc'],
             'paging' => true,
             'pagingType' => 'full_numbers',
             'searching' => true,
