@@ -18,9 +18,9 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title table-group-buttons">
                         <a href="{{ route('back.faq.questions.create') }}" class="btn btn-xs btn-primary m-r-xl">Добавить</a>
-                        <a href="#" data-url="{{ route('back.faq.questions.moderate.activity') }}" class="btn btn-xs btn-default">Изменить активность</a>
-                        <a href="#" data-url="{{ route('back.faq.questions.moderate.read') }}" class="btn btn-xs btn-default">Отметить как прочитанное</a>
-                        <a href="#" data-url="{{ route('back.faq.questions.moderate.destroy') }}" class="btn btn-xs btn-danger">Удалить</a>
+                        <a href="#" data-url="{{ route('back.faq.questions.moderate.activity') }}" class="btn btn-xs btn-default moderate">Изменить активность</a>
+                        <a href="#" data-url="{{ route('back.faq.questions.moderate.read') }}" class="btn btn-xs btn-default moderate">Отметить как прочитанное</a>
+                        <a href="#" data-url="{{ route('back.faq.questions.moderate.destroy') }}" class="btn btn-xs btn-danger moderate">Удалить</a>
                         <div class="ibox-tools">
                             <a href="{{ route('back.faq.questions.export') }}"
                                class="btn btn-sm btn-primary">Экспорт</a>

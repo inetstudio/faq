@@ -45,6 +45,12 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
                     'is_active' => $item['is_active'],
                 ]
             )->render(),
+            'persons' => view(
+                'admin.module.faq.questions::back.partials.datatables.persons',
+                [
+                    'persons' => $item['persons'],
+                ]
+            )->render(),
             'name' => $item['name'],
             'email' => $item['email'],
             'question' => Str::limit($item['question'], 150, '...'),

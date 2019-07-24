@@ -18,7 +18,7 @@ questions.init = function () {
     $('.group-element').iCheck('toggle');
   });
 
-  $('#questions_table .table-group-buttons a').on('click', function () {
+  $('#questions_table .table-group-buttons a.moderate').on('click', function () {
     let $btn = $(this);
 
     let url = $btn.data('url');

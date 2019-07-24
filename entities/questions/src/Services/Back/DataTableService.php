@@ -60,6 +60,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
         $query = $this->model->buildQuery(
             [
                 'columns' => ['is_read', 'question', 'created_at', 'updated_at'],
+                'relations' => ['persons'],
             ]
         );
 
@@ -98,6 +99,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
                 ->render(), 'orderable' => false, 'searchable' => false, ],
             ['data' => 'read', 'name' => 'is_read', 'title' => 'Непрочитано', 'searchable' => false],
             ['data' => 'active', 'name' => 'is_active', 'title' => 'Активность', 'searchable' => false],
+            ['data' => 'persons', 'name' => 'persons.name', 'title' => 'Эксперт'],
             ['data' => 'name', 'name' => 'name', 'title' => 'Имя'],
             ['data' => 'email', 'name' => 'email', 'title' => 'Email'],
             ['data' => 'question', 'name' => 'quiestion', 'title' => 'Вопрос'],
