@@ -2,7 +2,7 @@
 
 namespace InetStudio\FAQ\Questions\Http\Controllers\Front;
 
-use App\Http\Controllers\Controller;
+use InetStudio\AdminPanel\Base\Http\Controllers\Controller;
 use InetStudio\FAQ\Questions\Http\Requests\Front\SaveItemRequest;
 use InetStudio\FAQ\Questions\Contracts\Services\Front\ItemsServiceContract;
 use InetStudio\FAQ\Questions\Contracts\Http\Responses\Front\SaveResponseContract;
