@@ -147,7 +147,7 @@ class QuestionModel extends Model implements QuestionModelContract
                     ->with(['media' => function ($query) {
                         $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'mime_type', 'custom_properties']);
                     }]);
-            }
+            },
         ];
     }
 
