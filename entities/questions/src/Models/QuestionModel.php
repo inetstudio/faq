@@ -12,6 +12,7 @@ use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
 use InetStudio\Favorites\Models\Traits\Favoritable;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
@@ -74,6 +75,8 @@ class QuestionModel extends Model implements QuestionModelContract
         'email',
         'question',
         'answer',
+        'faqable_type',
+        'faqable_id',
     ];
 
     /**
@@ -135,6 +138,8 @@ class QuestionModel extends Model implements QuestionModelContract
             'is_active',
             'name',
             'email',
+            'faqable_type',
+            'faqable_id',
         ];
 
         self::$buildQueryScopeDefaults['relations'] = [
@@ -226,6 +231,26 @@ class QuestionModel extends Model implements QuestionModelContract
     }
 
     /**
+     * Сеттер атрибута faqable_type.
+     *
+     * @param $value
+     */
+    public function setFaqableTypeAttribute($value): void
+    {
+        $this->attributes['faqable_type'] = trim(strip_tags($value));
+    }
+
+    /**
+     * Сеттер атрибута faqable_id.
+     *
+     * @param $value
+     */
+    public function setFaqableIdAttribute($value): void
+    {
+        $this->attributes['faqable_id'] = (int) trim(strip_tags($value));
+    }
+
+    /**
      * Геттер атрибута type.
      *
      * @return string
@@ -269,5 +294,15 @@ class QuestionModel extends Model implements QuestionModelContract
     public function scopeInactive($query)
     {
         return $query->where('is_active', 0);
+    }
+
+    /**
+     * Полиморфное отношение с остальными моделями.
+     *
+     * @return MorphTo
+     */
+    public function faqable(): MorphTo
+    {
+        return $this->morphTo();
     }
 }

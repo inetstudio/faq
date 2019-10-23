@@ -46,7 +46,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
 
         return DataTables::of($this->query())
             ->setTransformer($transformer)
-            ->rawColumns(['read', 'active', 'actions'])
+            ->rawColumns(['read', 'active', 'material', 'actions'])
             ->make();
     }
 
@@ -62,7 +62,7 @@ class DataTableService extends DataTable implements DataTableServiceContract
                 'columns' => ['is_read', 'question', 'created_at', 'updated_at'],
                 'relations' => ['persons'],
             ]
-        );
+        )->with(['faqable']);
 
         return $query;
     }
@@ -105,6 +105,13 @@ class DataTableService extends DataTable implements DataTableServiceContract
             ['data' => 'question', 'name' => 'question', 'title' => 'Вопрос'],
             ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Дата создания'],
             ['data' => 'updated_at', 'name' => 'updated_at', 'title' => 'Дата обновления'],
+            [
+                'data' => 'material',
+                'name' => 'material',
+                'title' => 'Материал',
+                'orderable' => false,
+                'searchable' => false,
+            ],
             [
                 'data' => 'actions',
                 'name' => 'actions',

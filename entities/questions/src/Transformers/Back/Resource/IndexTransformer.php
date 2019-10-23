@@ -56,6 +56,12 @@ class IndexTransformer extends TransformerAbstract implements IndexTransformerCo
             'question' => Str::limit($item['question'], 150, '...'),
             'created_at' => (string) $item['created_at'],
             'updated_at' => (string) $item['updated_at'],
+            'material' => view(
+                'admin.module.faq.questions::back.partials.datatables.material',
+                [
+                    'item' => $item['faqable'],
+                ]
+            )->render(),
             'actions' => view(
                 'admin.module.faq.questions::back.partials.datatables.actions',
                 [
