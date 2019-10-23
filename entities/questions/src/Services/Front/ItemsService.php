@@ -55,6 +55,8 @@ class ItemsService extends BaseService implements ItemsServiceContract
             'name' => $user->name ?? $data['name'],
             'email' => $user->email ?? $data['email'],
             'question' => $data['question'],
+            'faqable_type' => $data['faqable_type'] ?? null,
+            'faqable_id' => $data['faqable_id'] ?? null,
         ], 0);
 
         $result = ($item && $item['id']);
