@@ -44,7 +44,7 @@ class ItemsService extends BaseService implements ItemsServiceContract
      */
     public function save(array $data): array
     {
-        $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\UsersServiceContract');
+        $usersService = app()->make('InetStudio\ACL\Users\Contracts\Services\Front\ItemsServiceContract');
 
         $user = $usersService->getUser();
 
