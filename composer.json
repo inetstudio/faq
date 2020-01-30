@@ -12,7 +12,6 @@
   "require": {
     "inetstudio/admin-panel": "^6.0",
     "inetstudio/captcha": "^6.0",
-    "inetstudio/favorites": "^6.0",
     "inetstudio/persons": "^6.0"
   },
   "autoload": {

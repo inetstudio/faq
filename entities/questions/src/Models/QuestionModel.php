@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
 use InetStudio\Uploads\Models\Traits\HasImages;
-use InetStudio\Favorites\Models\Traits\Favoritable;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
+use InetStudio\AdminPanel\Base\Models\Traits\HasDynamicRelations;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
 use InetStudio\AdminPanel\Base\Models\Traits\Scopes\BuildQueryScopeTrait;
 
@@ -29,8 +29,8 @@ class QuestionModel extends Model implements QuestionModelContract
     use HasPersons;
     use Notifiable;
     use Searchable;
-    use Favoritable;
     use SoftDeletes;
+    use HasDynamicRelations;
     use BuildQueryScopeTrait;
 
     /**
