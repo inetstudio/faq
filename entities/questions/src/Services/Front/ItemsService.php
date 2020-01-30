@@ -7,7 +7,6 @@ use InetStudio\AdminPanel\Base\Services\BaseService;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use InetStudio\FAQ\Tags\Services\Front\Traits\TagsServiceTrait;
 use InetStudio\FAQ\Questions\Contracts\Models\QuestionModelContract;
-use InetStudio\Favorites\Services\Front\Traits\FavoritesServiceTrait;
 use InetStudio\FAQ\Questions\Contracts\Services\Front\ItemsServiceContract;
 
 /**
@@ -16,12 +15,6 @@ use InetStudio\FAQ\Questions\Contracts\Services\Front\ItemsServiceContract;
 class ItemsService extends BaseService implements ItemsServiceContract
 {
     use TagsServiceTrait;
-    use FavoritesServiceTrait;
-
-    /**
-     * @var string
-     */
-    protected $favoritesType = 'faq_question';
 
     /**
      * ItemsService constructor.
