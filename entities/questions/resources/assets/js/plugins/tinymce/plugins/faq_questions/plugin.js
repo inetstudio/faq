@@ -22,11 +22,13 @@ window.tinymce.PluginManager.add('faq', function(editor) {
               data: widgetData,
             },
           ]);
-    } else {
-      let component = window.Admin.vue.modulesComponents.$refs['faq_FaqWidget'][0];
-
-      component.$data.model.id = widgetData.model.id;
     }
+  }
+
+  function loadWidget() {
+    let component = window.Admin.vue.modulesComponents.$refs['faq_FaqWidget'][0];
+
+    component.$data.model.id = widgetData.model.id;
   }
 
   editor.addButton('add_faq_widget', {
@@ -46,6 +48,8 @@ window.tinymce.PluginManager.add('faq', function(editor) {
         initFaqComponents();
 
         window.waitForElement('#add_faq_widget_modal', function() {
+          loadWidget();
+
           $('#add_faq_widget_modal').modal();
         });
       } else {
