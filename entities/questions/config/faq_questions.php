@@ -49,4 +49,15 @@ return [
         'enable' => false,
         'name' => 'faq_questions_notify',
     ],
+
+    'list_styles' => [
+        [
+            'text' => 'h2',
+            'value' => 'h2',
+        ],
+        [
+            'text' => 'h3',
+            'value' => 'h3',
+        ],
+    ],
 ];
