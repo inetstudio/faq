@@ -150,7 +150,7 @@ class QuestionModel extends Model implements QuestionModelContract
             'persons' => function ($query) {
                 $query->select(['id', 'name', 'slug'])
                     ->with(['media' => function ($query) {
-                        $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'mime_type', 'custom_properties']);
+                        $query->select(['id', 'model_id', 'model_type', 'collection_name', 'file_name', 'disk', 'conversions_disk', 'uuid', 'mime_type', 'custom_properties']);
                     }]);
             },
         ];
