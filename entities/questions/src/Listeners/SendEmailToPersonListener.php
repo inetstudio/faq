@@ -21,25 +21,23 @@ class SendEmailToPersonListener implements SendEmailToPersonListenerContract
     {
         $item = $event->item;
 
-        if ($item->persons->count() > 0) {
-            if (config('faq_questions.mails_persons.send')) {
-                if (config('faq_questions.queue.enable')) {
-                    $queue = config('faq_questions.queue.name') ?? 'faq_questions_notify';
+        if (config('faq_questions.mails_persons.send')) {
+            if (config('faq_questions.queue.enable')) {
+                $queue = config('faq_questions.queue.name') ?? 'faq_questions_notify';
 
-                    $item->notify(
-                        app()->make(
-                            'InetStudio\FAQ\Questions\Contracts\Notifications\Front\NewItemQueueableNotificationContract',
-                            compact('item')
-                        )->onQueue($queue)
-                    );
-                } else {
-                    $item->notify(
-                        app()->make(
-                            'InetStudio\FAQ\Questions\Contracts\Notifications\Front\NewItemNotificationContract',
-                            compact('item')
-                        )
-                    );
-                }
+                $item->notify(
+                    app()->make(
+                        'InetStudio\FAQ\Questions\Contracts\Notifications\Front\NewItemQueueableNotificationContract',
+                        compact('item')
+                    )->onQueue($queue)
+                );
+            } else {
+                $item->notify(
+                    app()->make(
+                        'InetStudio\FAQ\Questions\Contracts\Notifications\Front\NewItemNotificationContract',
+                        compact('item')
+                    )
+                );
             }
         }
     }
