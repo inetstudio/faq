@@ -36,10 +36,10 @@ class NewItemMail extends Mailable implements NewItemMailContract
      */
     public function build(): self
     {
-        $subject = config('app.name').' | '.config('faq_questions.mails_experts.subject', 'Новый вопрос');
-        $headers = config('faq_questions.mails_experts.headers', []);
+        $subject = config('app.name').' | '.config('faq_questions.mails_persons.subject', 'Новый вопрос');
+        $headers = config('faq_questions.mails_persons.headers', []);
 
-        $to = config('faq_questions.mails_experts.to') ?? $this->item->persons->first()->user->email;
+        $to = config('faq_questions.mails_persons.to') ?? $this->item->persons->first()->user->email;
 
         return $this->from(config('mail.from.address'), config('mail.from.name'))
             ->to($to, '')
