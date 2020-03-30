@@ -9,7 +9,7 @@ use InetStudio\FAQ\Questions\Contracts\Notifications\Front\NewItemQueueableNotif
 /**
  * Class NewItemQueueableNotification.
  */
-class NewItemQueueableNotification extends NewQuestionNotification implements ShouldQueue, NewItemQueueableNotificationContract
+class NewItemQueueableNotification extends NewItemNotification implements ShouldQueue, NewItemQueueableNotificationContract
 {
     use Queueable;
 }
