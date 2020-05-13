@@ -1,5 +1,6 @@
 require('./plugins/tinymce/plugins/faq_questions');
-require('../../../../../../widgets/resources/assets/js/mixins/widget');
+
+require('../../../../../../widgets/entities/widgets/resources/assets/js/mixins/widget');
 
 require('./stores/faq_questions');
 

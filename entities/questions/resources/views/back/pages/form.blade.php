@@ -113,7 +113,7 @@
                                             ],
                                         ]) !!}
 
-                                        {!! Form::persons('', $item, [
+                                        {!! Form::persons('persons', $item, [
                                             'label' => 'Эксперты',
                                             'placeholder' => 'Выберите экспертов',
                                         ]) !!}

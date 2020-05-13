@@ -17,9 +17,10 @@
                         <template v-if="options.ready">
                             <base-dropdown
                                 label="Оформление"
-                                name="questions_list_style"
                                 v-bind:attributes="{
-                                    'data-placeholder': 'Выберите тип оформления'
+                                    placeholder: 'Выберите тип оформления',
+                                    clearable: false,
+                                    reduce: option => option.value
                                 }"
                                 v-bind:options="options.listStyles"
                                 v-bind:selected.sync="model.params.style"
@@ -111,21 +112,8 @@
           component.options.ready = true;
         });
       },
-      initAdditionalComponents() {
-        if (typeof window.Admin.vue.modulesComponents.$refs['faq_QuestionsListItemForm'] == 'undefined') {
-          window.Admin.vue.modulesComponents.modules.faq.components = _.union(
-              window.Admin.vue.modulesComponents.modules.faq.components,
-              [
-                {
-                  name: 'QuestionsListItemForm',
-                  data: {},
-                }
-              ]
-          );
-        }
-      },
       add() {
-        this.initAdditionalComponents();
+        window.Admin.vue.helpers.initComponent('faq', 'QuestionsListItemForm', {});
 
         window.Admin.vue.stores['faq_questions'].commit('setMode', 'add_list_item');
         window.Admin.vue.stores['faq_questions'].commit('setQuestion', {});

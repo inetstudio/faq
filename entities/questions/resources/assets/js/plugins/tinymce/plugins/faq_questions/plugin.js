@@ -22,22 +22,8 @@ window.tinymce.PluginManager.add('faq', function(editor) {
     }
   };
 
-  function initComponent(componentName) {
-    if (typeof window.Admin.vue.modulesComponents.$refs['faq_'+componentName] == 'undefined') {
-      window.Admin.vue.modulesComponents.modules.faq.components = _.union(
-          window.Admin.vue.modulesComponents.modules.faq.components,
-          [
-            {
-              name: componentName,
-              data: widgetData[componentName]
-            }
-          ]
-      );
-    }
-  }
-
   function loadWidget(componentName) {
-    let component = window.Admin.vue.modulesComponents.$refs['faq_'+componentName][0];
+    let component = window.Admin.vue.helpers.getVueComponent('faq', componentName);
 
     component.$data.model.id = widgetData[componentName].model.id;
   }
@@ -69,7 +55,7 @@ window.tinymce.PluginManager.add('faq', function(editor) {
               id: parseInt($(content).attr('data-id')) || 0,
             };
 
-            initComponent('FaqWidget');
+            window.Admin.vue.helpers.initComponent('faq', 'FaqWidget', widgetData['FaqWidget']);
 
             window.waitForElement('#add_faq_widget_modal', function() {
               loadWidget('FaqWidget');
@@ -109,7 +95,7 @@ window.tinymce.PluginManager.add('faq', function(editor) {
               id: parseInt($(content).attr('data-id')) || 0,
             };
 
-            initComponent('QuestionsList');
+            window.Admin.vue.helpers.initComponent('faq', 'QuestionsList', widgetData['QuestionsList']);
 
             window.waitForElement('#add_questions_widget_modal', function() {
               loadWidget('QuestionsList');

@@ -22,21 +22,8 @@
       }
     },
     methods: {
-      initAdditionalComponents() {
-        if (typeof window.Admin.vue.modulesComponents.$refs['faq_QuestionsListItemForm'] == 'undefined') {
-          window.Admin.vue.modulesComponents.modules.faq.components = _.union(
-              window.Admin.vue.modulesComponents.modules.faq.components,
-              [
-                {
-                  name: 'QuestionsListItemForm',
-                  data: {}
-                }
-              ]
-          );
-        }
-      },
       edit() {
-        this.initAdditionalComponents();
+        window.Admin.vue.helpers.initComponent('faq', 'QuestionsListItemForm', {});
 
         window.Admin.vue.stores['faq_questions'].commit('setMode', 'edit_list_item');
 
