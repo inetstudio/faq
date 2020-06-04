@@ -18,6 +18,7 @@
                             <base-dropdown
                                 label="Оформление"
                                 v-bind:attributes="{
+                                    label: 'text',
                                     placeholder: 'Выберите тип оформления',
                                     clearable: false,
                                     reduce: option => option.value
