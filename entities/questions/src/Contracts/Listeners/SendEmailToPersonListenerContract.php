@@ -7,4 +7,5 @@ namespace InetStudio\FAQ\Questions\Contracts\Listeners;
  */
 interface SendEmailToPersonListenerContract
 {
+    public function handle($event): void;
 }
