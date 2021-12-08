@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use InetStudio\FAQ\Tags\Models\Traits\HasTags;
 use InetStudio\ACL\Users\Models\Traits\HasUser;
-use InetStudio\Uploads\Models\Traits\HasImages;
+use InetStudio\UploadsPackage\Uploads\Models\Traits\HasMedia;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use InetStudio\PersonsPackage\Persons\Models\Traits\HasPersons;
 use InetStudio\AdminPanel\Base\Models\Traits\HasDynamicRelations;
@@ -25,7 +25,7 @@ class QuestionModel extends Model implements QuestionModelContract
     use HasTags;
     use HasUser;
     use Auditable;
-    use HasImages;
+    use HasMedia;
     use HasPersons;
     use Notifiable;
     use Searchable;
@@ -44,16 +44,6 @@ class QuestionModel extends Model implements QuestionModelContract
      * @var bool
      */
     protected $auditTimestamps = true;
-
-    /**
-     * Настройки для генерации изображений.
-     *
-     * @var array
-     */
-    protected $images = [
-        'config' => 'faq_questions',
-        'model' => 'question',
-    ];
 
     /**
      * Связанная с моделью таблица.
@@ -304,5 +294,10 @@ class QuestionModel extends Model implements QuestionModelContract
     public function faqable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    public function getMediaConfig(): array
+    {
+        return config('faq_questions.media', []);
     }
 }
