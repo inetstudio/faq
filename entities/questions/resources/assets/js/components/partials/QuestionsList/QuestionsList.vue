@@ -1,6 +1,5 @@
 <template>
-    <div id="add_questions_widget_modal" tabindex="-1" role="dialog" aria-hidden="true" class="modal inmodal fade"
-         ref="modal">
+    <div id="add_questions_widget_modal" tabindex="-1" role="dialog" aria-hidden="true" class="modal inmodal fade" ref="modal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -56,6 +55,9 @@
 </template>
 
 <script>
+  import hash from 'object-hash';
+  import Swal from 'sweetalert2';
+
   export default {
     name: 'QuestionsList',
     data() {
@@ -124,9 +126,9 @@
         });
       },
       remove(payload) {
-        swal({
+        Swal.fire({
           title: 'Вы уверены?',
-          type: 'warning',
+          icon: 'warning',
           showCancelButton: true,
           cancelButtonText: 'Отмена',
           confirmButtonColor: '#DD6B55',
@@ -141,7 +143,7 @@
       },
       saveItem() {
         let storeQuestion = JSON.parse(JSON.stringify(window.Admin.vue.stores['faq_questions'].state.question));
-        storeQuestion.hash = window.hash(storeQuestion.model);
+        storeQuestion.hash = hash(storeQuestion.model);
 
         let index = this.getQuestionIndex(storeQuestion.model.id);
 

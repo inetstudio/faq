@@ -50,6 +50,8 @@
 </template>
 
 <script>
+  import hash from 'object-hash';
+
   export default {
     name: 'QuestionsListItemForm',
     data() {
@@ -63,7 +65,7 @@
     watch: {
       'question.model': {
         handler: function(newValue, oldValue) {
-          this.question.isModified = !(!newValue || this.question.hash === window.hash(newValue));
+          this.question.isModified = !(!newValue || this.question.hash === hash(newValue));
         },
         deep: true,
       }

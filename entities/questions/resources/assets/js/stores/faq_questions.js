@@ -1,4 +1,7 @@
-window.Admin.vue.stores['faq_questions'] = new Vuex.Store({
+import hash from 'object-hash';
+import { v4 as uuidv4 } from 'uuid';
+
+window.Admin.vue.stores['faq_questions'] = new window.Vuex.Store({
     state: {
         emptyQuestion: {
             model: {
@@ -15,10 +18,10 @@ window.Admin.vue.stores['faq_questions'] = new Vuex.Store({
     mutations: {
         setQuestion (state, question) {
             let emptyQuestion = JSON.parse(JSON.stringify(state.emptyQuestion));
-            emptyQuestion.model.id = UUID.generate();
+            emptyQuestion.model.id = uuidv4();
 
             let resultQuestion = _.merge(emptyQuestion, question);
-            resultQuestion.hash = window.hash(resultQuestion.model);
+            resultQuestion.hash = hash(resultQuestion.model);
 
             state.question = resultQuestion;
         },

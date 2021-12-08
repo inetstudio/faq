@@ -1,30 +1,29 @@
+import {questions} from './package/questions';
+
 require('./plugins/tinymce/plugins/faq_questions');
 
 require('../../../../../../widgets/entities/widgets/resources/assets/js/mixins/widget');
 
 require('./stores/faq_questions');
 
-Vue.component(
+window.Vue.component(
     'FaqWidget',
-    require('./components/partials/FaqWidget/FaqWidget.vue').default,
+    () => import('./components/partials/FaqWidget/FaqWidget.vue'),
 );
 
-Vue.component(
+window.Vue.component(
     'QuestionsList',
-    require('./components/partials/QuestionsList/QuestionsList.vue').default,
+    () => import('./components/partials/QuestionsList/QuestionsList.vue'),
 );
 
-Vue.component(
+window.Vue.component(
     'QuestionsListItem',
-    require('./components/partials/QuestionsList/QuestionsListItem.vue').default,
+    () => import('./components/partials/QuestionsList/QuestionsListItem.vue'),
 );
 
-Vue.component(
+window.Vue.component(
     'QuestionsListItemForm',
-    require('./components/partials/QuestionsList/QuestionsListItemForm.vue').default,
+    () => import('./components/partials/QuestionsList/QuestionsListItemForm.vue'),
 );
 
-window.Switchery = require('switchery');
-
-let questions = require('./package/questions');
 questions.init();

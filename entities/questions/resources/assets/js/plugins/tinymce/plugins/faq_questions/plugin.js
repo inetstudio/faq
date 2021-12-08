@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 window.tinymce.PluginManager.add('faq', function(editor) {
   let widgetData = {
     'FaqWidget': {
@@ -63,10 +65,10 @@ window.tinymce.PluginManager.add('faq', function(editor) {
               $('#add_faq_widget_modal').modal();
             });
           } else {
-            swal({
+            Swal.fire({
               title: 'Ошибка',
               text: 'Необходимо выбрать виджет-вопрос',
-              type: 'error',
+              icon: 'error',
             });
 
             return false;
@@ -103,10 +105,10 @@ window.tinymce.PluginManager.add('faq', function(editor) {
               $('#add_questions_widget_modal').modal();
             });
           } else {
-            swal({
+            Swal.fire({
               title: 'Ошибка',
               text: 'Необходимо выбрать виджет вопрос-ответ',
-              type: 'error',
+              icon: 'error',
             });
 
             return false;
