@@ -10,9 +10,9 @@
     }
   ],
   "require": {
-    "inetstudio/admin-panel": "^9.0",
-    "inetstudio/captcha": "^9.0",
-    "inetstudio/persons": "^9.0"
+    "inetstudio/admin-panel": "^10.0",
+    "inetstudio/captcha": "^10.0",
+    "inetstudio/persons": "^10.0"
   },
   "autoload": {
     "psr-4": {
